@@ -177,7 +177,65 @@ The following closes Barry's opening unprompted survey. Paragraph breaks have be
 
 ### Cross-game contrasts named by Barry
 
-_Deferred._
+#### Q1 — What remains under direct player command, and what may be delegated?
+
+**Prompt:** Which supporting domains would Barry still want to command personally after mastering the game, and which would he normally delegate—diplomacy, logistics, economics, heroes and quests, production, or something else?
+
+**Barry's direct response:**
+
+> Okay, back to the Q&A. I think unit movement and actions, such as attack or defense, should always be the domain of the human controller. But everything else that happens behind the scenes could optionally be controlled by a heuristic or AI. So as a chief of staff, and that includes, as you said, diplomacy, logistics, economics, and production. I think heroes and quests should also be controlled always by the human. So the very minimal game is, of the units available, you move them around, you attack, you entrench, you set them on defend and response, whatever you do, and you send your heroes out to quest in ruins if that's what we do. But the underlying economy and support structure for the army or the nation can be delegated away, or it can be controlled. And ideally, we'd love to have an intuitive, potentially layered interface for each of those. So it could be done in a very simple way, or you could choose advanced controls and take a fine-tuned approach to it. That seems natural to me.
+
+#### Q2 — When must delegated staff return authority to the player?
+
+**Prompt:** When a delegated domain reaches a consequential or irreversible choice—accepting an alliance, prioritising one front for scarce supply, or choosing cavalry instead of fortifications—should the staff execute autonomously, act only within player-set policies, or pause and recommend a decision for the player's approval?
+
+**Barry's direct response:**
+
+> Yes, the way you've laid it out sounds perfect, exactly how I was envisaging. The minimum case is that the player is the general or field marshal within the headquarters at the front, directing the actual machinery of war. And in the broader case, they're more like a dictator with advisers, or perhaps even a prime minister. Doesn't need to be a dictator, but an authority that, at a high level, determines the policy behind the front as well. And the way we've discussed allowing different levels of that seems right to me. It allows the game to very naturally tune itself to different motivations from the players. Your question about irreversible or consequential choices I think should go back to the player. The determination of what represents a consequential or irreversible choice is obviously going to be a challenge in that sense. In that we need to have a heuristic or an AI system, if the Chief of Staff is powered by an actual intelligence, that is able to determine that, which might be difficult, but certainly something that we can experiment with and iterate on. But the general principle should be that certain of the highest-level decisions must be made by the Commander in Chief, which is the player. Much like occurs in presidential democracies like the U.S., and was probably the case in history for commanders such as Napoleon, for example, although you can correct me on that.
+
+**Barry's follow-up question:**
+
+> So is the field commander mode more like Alexander or Caesar? It would be good to have a well-known historical figure attributed to that type of mode, like we've done for Napoleon, which I think is a good idea, because it immediately allows the player to relate to a particular style of command.
+
+#### Q3 — Should advisers differ, and should trusting them be a strategic choice?
+
+**Prompt:** Should delegation be a dependable interface convenience, or should advisers differ in competence, personality, loyalty and bias, so that appointments and trust become part of the game?
+
+**Barry's direct response:**
+
+> Lovely. I like that settled hierarchy and attributing historical figures to a given style of delegation makes more sense than actually naming the delegation after them, as you note. Regarding your earlier question about whether advisors might differ in competence, personality, loyalty and bias, or should they be always equally strong in that abstracted way, I think they should differ. There should always be choices in appointment and describing different attributes of the advisor that have inherent trade-offs. It's not a large impost on the player because these kind of decisions only need to be made occasionally, and although they can have strong ramifications, it's not something that occupies the time of the player. So it's part of the game system without the trap of forcing a player to micromanage, such they might decide it's more of a chore than an entertainment. And that's the key I think we're always aiming for here. If someone wants to micromanage detail, that's fine, provided that's what they enjoy. But if it's a decision for the player where it doesn't eat up much of their time, or if it's a one-off decision or a rare decision, then it's not consequential in burning their attention. And I think in that case we should be implementing it in a way that produces interesting mechanics. And even if the player micromanages everything themselves, that's a choice that they have to make where they may be less competent than a given suite of advisors. So I don't think there's anything wrong regarding balance, and indeed it just gives the player more options and how much they trust themselves versus how much they trust a selected staff. So I think that's the right way to do it.
+
+#### Q4 — Which adviser qualities should be visible, and which may remain uncertain?
+
+**Prompt:** Should professional competence and declared doctrine be legible when an adviser is appointed, while loyalty, ambition and private motives remain partly uncertain and emerge through advice and conduct—always with enough evidence that failure does not feel like an arbitrary trap?
+
+**Barry's direct response:**
+
+> Yes, I completely agree with your instinct here. Let's go with that model.
+
+#### Q5 — Where should uncertainty enter the war?
+
+**Prompt:** Should uncertainty arise mainly before commitment—through hidden enemy strength, simultaneous orders, incomplete intelligence and events—or during combat resolution through variable losses and outcomes? How strongly should good preparation protect the player from bad luck?
+
+**Barry's direct response:**
+
+> I honestly think both. During combat resolution accounts for the fact that at least in our primary iteration of this game, we won't be simulating tactical battlefields, but there is an inherent stochasticity to that that can depend on many factors on the day, lieutenants and commanders of legions or brigades within that engagement, or whatever they're defined in the fantasy world. These accumulative elements can be nicely captured by some randomization function in the combat resolution. And I think it's different to the uncertainty that comes about through enemy strengths, simultaneous orders, incomplete intelligence, and so on, because that aspect can be potentially controlled by good play and further mechanics. So, for example, spies or scouting units that cost resources to invest in but can potentially yield improved intelligence. It could be further down the line that we can also improve combat resolution odds via appointment, for example, of heroes to particular units. And I think we'll inherently have some type of experience system within units that's similar to what was done in Panzer Corps, for example, and probably many other games, where veteran units provide improved combat odds but not guaranteed successes, and as they're attrited and receive replacements, that value can be eroded, and so on. These are the kind of things that mechanically can be done very well on a computer, but again don't require a lot of number crunching from the player themselves. They can simply look at the net combat effectiveness of a given unit with all of these factors put together, and they will affect odds, but ultimately they don't affect certainty. Most of the good games that I've covered so far, especially the ones that have computer implementations, do this very well, and that includes everything from simple games like Warlords through to more complex approaches like in Panzer Corps.
+
+#### Q6 — How wide should irreducible combat luck be?
+
+**Prompt:** If a veteran, well-supplied army attacks a weaker, thoroughly scouted opponent under favourable conditions, should catastrophic defeat remain possible, or should randomness principally affect casualties, delay and degree of success once the underlying advantage becomes overwhelming?
+
+**Barry's direct response:**
+
+> I think it should principally affect casualties, delay and degree of success. It can be very disappointing for a player to carefully set up a battle and then have some arbitrary stochastic factor destroy all of their hard-won efforts. So changes in odds and smaller shifts make sense. Catastrophic overturns from a strong position largely don't, unless the circumstances signal it quite clearly. So it could be that there's an advisor before a battle, much like there was in Warlords, where a player could consult the advisor on what they think the probability of success in the battle is, but also how risky it is. So in some cases they may have, for example, a less than 50 percent probability of succeeding, but there's a 10 percent chance that the enemy will break, for example, or vice versa. So some advisor in the commander's tent, or a set of advisors that can provide some advice on the potential for catastrophic failure or unexpected rabbit-out-of-the-hat victory is probably a quite useful mechanic. And again, it can be used or ignored by the player. It's not an attention hog, and I think it would reassure the player that the system isn't unfairly fickle.
+
+#### Q7 — Should the game expose combat mathematics or remain wholly in-world?
+
+**Prompt:** Should the pre-battle adviser expose precise numerical probabilities, or provide an in-world qualitative assessment whose certainty and precision reflect available intelligence and adviser competence?
+
+**Barry's direct response:**
+
+> Definitely, the advisor should give an in-world assessment, not exact probabilities. I'm quite strong on that fact. It should feel immersive, like you're actually a field commander in this fantasy setting, making decisions under uncertainty. So we should never expose the player. I don't think ever expose the player to the underlying mathematics. It should all be framed in terms of what if they were there making these decisions, with advisors of various competencies and so forth. Because in a real war, certainly in ancient wars, probabilities were likely never offered, except maybe you have a greater than even chance of winning this. But, you know, beyond that, there wasn't sort of precise calculations. So even if the mechanics underpinning our combat model has those calculations, and a player can learn to infer them through interpreting more qualitative advice, they're not actually presented with those in an immersion-breaking way.
 
 ### Context and access effects
 
