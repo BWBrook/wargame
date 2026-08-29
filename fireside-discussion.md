@@ -9,6 +9,7 @@ This will be a conversation, not a title-by-title questionnaire. Its main value 
 
 - Start with free recollection. Do not lead with the dossiers' theories or a checklist of mechanics.
 - Preserve Barry's direct recollections as personal evidence; distinguish them from later joint interpretation.
+- Capture intended meaning rather than literal speech-to-text output. Silently correct obvious name substitutions, homophones, grammar, and punctuation when context resolves them; preserve genuine ambiguity rather than inventing certainty.
 - Treat attraction and retention as different phenomena. A feature may sell the first session without sustaining the fifth.
 - Treat admiration and enjoyment as different phenomena. A design may be clever, beautiful, or historically convincing yet still go unplayed.
 - Treat redeeming features and decisive blockers separately. A failed game need not be wholly bad, and a favourite need not be frictionless.
@@ -63,7 +64,7 @@ Contradictions are evidence to explain, not noise to smooth away.
 
 #### Opening narration, chunk 1 — 24 August 2026
 
-The following is Barry's verbal narration, preserved as direct personal evidence. Paragraph breaks have been added for readability; no substantive wording has been normalised.
+The following is Barry's verbal narration, preserved as direct personal evidence. Paragraph breaks have been added for readability, and obvious speech-to-text errors are corrected where the intended meaning is clear; no analytical interpretation has been added.
 
 > I'll begin with some musings on what I think I find good in a wargame. I like the wargame to look appealing, but at the same time not be overwhelmingly complicated. I like to strike an interface that is immediately or rapidly intuitive and not overwhelming in its complexity. If there is complexity, it should be revealed in a measured way. Perhaps there should be options to reveal it, but the game should not necessarily depend on it. Many of the subsystems which might allow for that complexity ought to also allow for automation by an AI assistant.
 >
@@ -79,21 +80,21 @@ The following is Barry's verbal narration, preserved as direct personal evidence
 
 #### Opening narration, chunk 2 — 24 August 2026
 
-The following continues Barry's verbal narration. Paragraph breaks have been added for readability; no substantive wording has been normalised.
+The following continues Barry's verbal narration under the same light-normalisation convention.
 
-> Good. That's an excellent reference list. I'll work down the list and maybe jump around a little, but I can see already that I've talked about Africa Korps, the Russian Campaign, Victory in the Pacific, and Ancient Art of War already. And in fact, if I look at the chronological order in which I encountered them, the very first wargame I ever played was the Ancient Art of War on a friend's IBM. I had a Commodore 64 at the time, but there was no wargames that I had. Thereafter, I played with Tom Craig, and he, as I said, introduced me to Victory in the Pacific, Africa Korps, and the Russian Campaign, and they embedded my enjoyment and first experiences in wargames, all set in World War II.
+> Good. That's an excellent reference list. I'll work down the list and maybe jump around a little, but I can see already that I've talked about Afrika Korps, The Russian Campaign, Victory in the Pacific, and The Ancient Art of War already. And in fact, if I look at the chronological order in which I encountered them, the very first wargame I ever played was The Ancient Art of War on a friend's IBM. I had a Commodore 64 at the time, but there were no wargames that I had. Thereafter, I played with Tom Craig, and he, as I said, introduced me to Victory in the Pacific, Afrika Korps, and The Russian Campaign, and they embedded my enjoyment and first experiences in wargames, all set in World War II.
 >
 > I never played Dragons of Glory. I never obtained that module, so my first introduction to The War of the Lance was indeed the C64 version released in 1990, which I purchased because I knew I liked the tabletop versions of wargames, and I invested sufficient time to read the manual carefully and try it out, use one of their original scenarios, and then launch a campaign. And I had the time, and I had the interest and the energy to invest in it, and it didn't overwhelm me. So I felt always that I could understand what was going on, even though I was a relatively novice wargamer, and that the phases themselves, whilst the turn itself could take quite a long time, because of the way it was phased, it didn't seem overwhelming. Each stage made sense, and one could complete that stage, such as the hero phase and diplomacy and so on, and see progress, understand it. And of course, as I played it more, it all became intuitive to me, and there was a level of depth that it reached that didn't go beyond into the extreme, and so I became a master of that game eventually.
 >
 > My next experience was the original Warlords, and that was appealing to me in its simplicity and yet underlying complexity and fast pace. There was one map. The map was relatively easy to understand. One could play each of the different sides against a computer opponent, or hot seat with your friends. The idea of having cities that anchored production and could transfer to other cities, so one could establish a forward front that seemed isolated, but provided one could maintain a presence there, then it could be rapidly reinforced and held as a strong point. The need for impetus, for momentum, as it's often called in wargames, or initiative, became very apparent in that game, as well as in the Russian Campaign, of course. In Warlords, it was a much simpler version than the Russian Campaign, but the tactic, or the strategy, I suppose I should say, of not progressing gently, but in fact rushing ahead to seize territory, which doesn't always work in a wargame, but in that one did, imparted some new lessons that were interesting.
 >
-> Where it suffered was, ultimately, there were only, I think, eight sides, and some of them were quite unbalanced. Other ones were nearly impregnable. Against a human component, Lord Bane, in his fastness, was almost unbeatable. Whereas against a computer opponent, the orcs of Kor, for example, had an ability to spread rapidly, and so could become very powerful very quickly. So I learned from that the different attributes that would work against a human opponent versus a scripted AI. And what I'm thinking for our new game is that we would have a more advanced heuristic and scripted AI, but we will also have, as we've noted, the ability to plug an intelligent agent into it, or another human, to provide that additional layer of challenge. So much of that was revealed in Warlords.
+> Where it suffered was, ultimately, there were only, I think, eight sides, and some of them were quite unbalanced. Other ones were nearly impregnable. Against a human opponent, Lord Bane, in his fastness, was almost unbeatable. Whereas against a computer opponent, the Orcs of Kor, for example, had an ability to spread rapidly, and so could become very powerful very quickly. So I learned from that the different attributes that would work against a human opponent versus a scripted AI. And what I'm thinking for our new game is that we would have a more advanced heuristic and scripted AI, but we will also have, as we've noted, the ability to plug an intelligent agent into it, or another human, to provide that additional layer of challenge. So much of that was revealed in Warlords.
 >
 > And then the next game I got was Panzer General. And Panzer General was my first experience at a campaign where I would act to protect and enhance my forces and grow them over time, grow their experience, grow their munitions, their unit types, upgrade them, and each action was a battle where I would choose which forces to deploy, but I would also have to think about protecting them. So one couldn't just throw away forces to gain a victory. It wasn't like chess where you could make sacrifices because you could see a strategic advantage, and provided you maintained that momentum, the sacrifice would pay with territory or momentum that would allow you to win a rapid game. In Panzer General, you had to think about the future, and you had to think that if you had your spearhead annihilated, even if you gained a rapid victory in that scenario, in the next one you would be stripped of that capacity, and it could erode your long-term planning. That became an important lesson. It was very addictive, and of course trying to simulate a historical outcome, such as the Axis conquering the Soviet Union, or undertaking Operation Sea Lion and conquering Britain, you know, they were enjoyable because they were ahistorical, and if one was successful enough, that was possible in Panzer General.
 >
 > I never played Fantasy General. I left that on the list because it's a fantasy version of it, and we're looking here to make a fantasy game. So I've heard mixed things about it, but I imagine it does contain useful lessons about what worked and didn't work in translating Panzer General into a fantasy setting. And indeed, there was much later a follow-up, Panzer General 2 and Fantasy General 2. But I think a lot of those follow-ups, and that includes later Warlords incarnations such as Warlords 3 and Warlords 4, and actually Unity of Command 2, none of which we reviewed, but these were much more upgraded in their graphics, and they provided many more features and so forth, but in doing so, I believe they lost something about the simplicity of the originals. They improved upon some of the problems in the originals, and they looked much better, but that is a passing improvement. It's not actually a resilient one. What's resilient is that the strategic map, or the scenario structure, whatever, it looks attractive, but it doesn't detract from the focus and the experience itself. And so adding more bells and whistles to a game in a new version doesn't always improve it.
 >
-> Whereas Warlords 2 improved Warlords in every way I could think of. All of the wonderful simplicity and replayability of that single map of Iluria was expanded into an infinite number of maps. In fact, one could create historic maps. There were many that shipped with the game. There was a builder, a toolset, where you could build it. I'm not proposing we do that, at least initially here, but it provided a lot more richness without that degrading of the original experience. So somehow Warlords 2 met the real challenge of improving in every way upon Warlords without degrading in any way what made Warlords great. Whereas many other sequels, I think, traded something in their improvements. Traded away some of the pleasure, or simplicity, or learnability. Somehow some of the experience of the original was lost in creating the new ones. And Warlords 2, in whoever it did it, did not trade that away. It just enhanced it. The next one I played is V for Victory, but I think I'll leave that for the next conversation we have.
+> Whereas Warlords II improved Warlords in every way I could think of. All of the wonderful simplicity and replayability of that single map of Illuria was expanded into an infinite number of maps. In fact, one could create historic maps. There were many that shipped with the game. There was a builder, a toolset, where you could build it. I'm not proposing we do that, at least initially here, but it provided a lot more richness without that degrading of the original experience. So somehow Warlords II met the real challenge of improving in every way upon Warlords without degrading in any way what made Warlords great. Whereas many other sequels, I think, traded something in their improvements. Traded away some of the pleasure, or simplicity, or learnability. Somehow some of the experience of the original was lost in creating the new ones. And Warlords II, however it did it, did not trade that away. It just enhanced it. The next one I played is V for Victory, but I think I'll leave that for the next conversation we have.
 
 #### Opening narration, chunk 3 — 24 August 2026
 
@@ -103,7 +104,7 @@ The following continues Barry's verbal narration. Paragraph breaks have been add
 
 #### Opening narration, chunk 4 — 24 August 2026
 
-The following continues Barry's verbal narration. Paragraph breaks have been added for readability; no substantive wording has been normalised.
+The following continues Barry's verbal narration under the same light-normalisation convention.
 
 > Now I move on to V for Victory. I like the game in many ways, although it definitely had its flaws. I think the way it handled complexity in a layered way was attractive. I like the way it handled combined arms and stacking hexes cleverly. I particularly liked its counterfactual scenarios, and that raises an important point about difficulty.
 >
@@ -123,7 +124,7 @@ The following continues Barry's verbal narration. Paragraph breaks have been add
 
 #### Opening narration, chunk 5 — 24 August 2026
 
-The following continues Barry's verbal narration. Paragraph breaks have been added for readability; no substantive wording has been normalised.
+The following continues Barry's verbal narration under the same light-normalisation convention.
 
 > The next game on the list I played was Battle of the Bulge, the Shenandoah Studio iPad game, and that had a number of attractions. One, it was available on mobile, on the iPad, and therefore it was very convenient. I could pick it up and play it for five minutes or five hours, but usually a short amount of time when I had a bit of time, and then leave it and go and do other things. It was truly portable and suited the mobile format. And in fact, the style of the game, where you had these discrete impulses, and you could just run a single impulse and come back to it and recognise where you were, why you had done that, and be ready to go again without much re-embedding. I'm not saying our eventual game will have those features, but it was an attractive feature of that game, and I've talked about others already.
 >
@@ -151,7 +152,7 @@ The following continues Barry's verbal narration. Paragraph breaks have been add
 
 #### Opening narration, chunk 6 — 24 August 2026
 
-The following closes Barry's opening unprompted survey. Paragraph breaks have been added for readability; no substantive wording has been normalised.
+The following closes Barry's opening unprompted survey under the same light-normalisation convention.
 
 > Next I'll talk about Commander: The Great War, and in fact I've talked about this quite a lot already, and I probably don't have a lot more to say, because when I proposed the game to you, I gave a bit more detail on why I thought it had good features. In summary, it's because it took a difficult situation, which was how do you represent trench warfare and long periods of relative immobility as two sides were deadlocked along a massive, immovable frontier where they hammered away at each other and achieved almost nothing, and yet within that there were subtleties where new technological developments started to allow for breakthroughs or advancements, and it went everything from creeping barrages to the first tanks to true combined arms, stormtroopers, although they weren't represented directly, they were in spirit represented in the Kaiserschlacht scenario, and the early mobility of the late 1914 part of the war and the fact that the war could, in fact, be all over by Christmas if you played it the right way. There were great features of it.
 >
@@ -292,6 +293,30 @@ The following closes Barry's opening unprompted survey. Paragraph breaks have be
 **Barry's direct response:**
 
 > Lovely. I think the way you've described all of that and the checks and balances is perfect and should make for excellent gameplay, at least as best as we can anticipate a priori. As to your question, I think we should deliberately trust the commander's documented judgment, because otherwise, having a player try and come up with a pre-declared strict priority order once again invokes our admonition against over-commitment of a player's attention to what ultimately are overly detailed matters. So it's that trade-off between a player's attention that remains interesting versus the need in this case to micromanage every front against all possible contingencies that they might want to anticipate.
+
+#### Q15 — Should formation identity be universal or exceptional?
+
+**Prompt:** Should veteran armies become named, persistent entities with histories and reputations—assets whose survival genuinely matters, as in *Panzer General*—or should their experience remain a simpler qualitative component so that losing one hurts strategically without feeling like losing a cultivated RPG character?
+
+**Barry's direct response:**
+
+> My vision, at least for the first iteration of the game, is that unlike Panzer General, this is not a linked series of scenarios where units are curated and carried forward in that sense. But instead, on the larger world map, units accumulate experience and other attributes and so change through each turn. In that way, I think it's better to have them remain simpler, qualitative components, rather than being like a named unit that's been cultivated over time. It's possible in some circumstances units could gain identities, but that might be in a different sort of way. In War of the Lance, for example, a certain unit might be defined by its origin, such as the High Clerist's Tower, or by its attachment to a high-ranking official—for example, their personal guard. I imagine things like that can occur. So units, when they are recruited, or if they exist at the start of the game, can be named. And if they are lost, then that might be something akin to losing a cultivated RPG character. But I think they're exceptions rather than rules. And they would need to fit in with the underlying narrative that we develop to underpin the war that's being simulated. We discussed earlier creating a sufficiently detailed mythology behind it, such that the player could understand the broad motivations of the sides and the individual nations. And I think as part of that, the idea of named units might arise rather naturally. What are your thoughts?
+
+#### Q16 — May ordinary formations earn a storied identity through play?
+
+**Prompt:** Might an ordinary levy very occasionally perform an act of such acclaim or obvious exceptionalism that it earns a title and a modest, thematically related trait?
+
+**Barry's direct response:**
+
+> I think that's an excellent suggestion. It allows additional flexibility for new named units to arise as a consequence of shaping the world, rather than through simple mechanical gamesmanship, which might otherwise be a temptation here.
+
+#### Q17 — Can a storied formation be reconstituted after destruction?
+
+**Prompt:** If a storied formation is destroyed, should its identity be permanently extinguished, or may its banner and title eventually be reconstituted with inexperienced recruits—preserving the institution and its history while losing the exceptional soldiers who earned it?
+
+**Barry's direct response:**
+
+> The latter, I would say. Much as you previously and rightly proposed, a royal guard could be reconstituted, yet it would have lost its original veterans and the direct continuity of its connection to the past. The title itself might still convey some prestige that could, in time, be restored.
 
 ### Context and access effects
 
