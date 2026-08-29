@@ -15,6 +15,7 @@ This will be a conversation, not a title-by-title questionnaire. Its main value 
 - Treat redeeming features and decisive blockers separately. A failed game need not be wholly bad, and a favourite need not be frictionless.
 - Consider context as evidence: edition, platform, age, available opponents, setup burden, rules access, session length, and competing demands may have shaped the experience.
 - Actively seek counterexamples to every emerging pattern.
+- Regularly test whether each proposed activity is an irreducible part of the player's military command or delegable staff work; do not assume that strategic importance requires recurring player handling.
 - Do not convert a recurring preference into a requirement for the new game during this discussion. That belongs to the later comparative audit.
 
 ## Conversation sequence
@@ -317,6 +318,38 @@ The following closes Barry's opening unprompted survey under the same light-norm
 **Barry's direct response:**
 
 > The latter, I would say. Much as you previously and rightly proposed, a royal guard could be reconstituted, yet it would have lost its original veterans and the direct continuity of its connection to the past. The title itself might still convey some prestige that could, in time, be restored.
+
+#### Q18 — Who manages ordinary reinforcement and replacement?
+
+**Prompt:** Should replenishment normally be a staff-managed process governed by manpower, supply, and player-set priorities, with unit-level control available optionally—or should choosing exactly which formations receive replacements remain part of the player's irreducible military command?
+
+**Barry's direct response:**
+
+> That should definitely be a staff-managed process unless the player explicitly wishes to intervene. It is good for you to regularly raise whether a certain action should be an irreducible part of the player's military campaign, but I see this very much in terms of production, logistics, reinforcement, and replacement: a staff-level, albeit very critical, activity.
+
+#### Q19 — Who determines force structure and production priorities?
+
+**Prompt:** If the realm must choose between many quickly raised levies and fewer trained troops, or between expanding cavalry, fleets, magical forces, and frontier fortifications, should that high-level direction remain an irreducible player decision while staff handles execution—or may a trusted adviser choose the overall composition as well?
+
+**Barry's direct response:**
+
+> A trusted adviser, once again. The broader staff can present the player with a set of troop options for their disposal, but the staff themselves determine the optimal mix and allocation of relative investments, assignments to particular fronts, priority production orders, and so on. The player could intervene in or fully run all of this, but that is not the default model we are working with. We should keep in mind that the player is primarily focused on the field general's role, using the resources made available to them rather than actively developing and cultivating those resources unless they directly choose to do so.
+
+#### Q20 — How should command authority, influence, and delegation vary between campaign modes?
+
+**Prompt:** When a field commander requests additional resources, should that request influence but not bind the broader staff, or should declaring a priority guarantee whatever support the system can provide?
+
+**Barry's direct response:**
+
+> Yes, I like the former a lot. Some games have a mechanism whereby the player accumulates prestige points—as in Unity of Command—which can then be spent to influence decisions. That could be a useful way of biasing production and availability, or redirecting resources as the player wishes, while limiting their ultimate command of the entire economy.
+>
+> As you note, this could also depend on the mode the player has chosen. Under the full sovereign-command, or “Napoleon,” mode, the player automatically gains authority over all these decisions and the line of command changes, even though the minutiae may still be delegated to staff. Under a field-general, or “Patton,” mode, those options are simply not available.
+>
+> We could therefore design a system in which the player switches hierarchies, or instead chooses to lock into a particular hierarchy for the whole game. On reflection, it might be better to lock into one hierarchy for an entire game. If players want to experience the campaign at a different level, they can begin a new game from that perspective. Switching back and forth could become confusing. Each level would offer advantages in simplicity and decision load, together with mechanisms for influencing higher levels without directly controlling them.
+>
+> Full economy-wide strategic direction is the most attention-hungry and time-consuming level, allowing the player to make all those decisions. Generally, only grognards would choose such a role because it edges closer to Gary Grigsby's War in the East—something we do not want to impose as the default, but which could exist as the highest-authority option.
+>
+> Potentially, tutorials and guidance—or even lockouts requiring the player to win at one level before moving to the next—could support that progression. I am brainstorming, but these levels of delegation and influence could create an interesting evolution of the experience, encouraging replay from different perspectives without intermixing them too much. They could accommodate novices and grognards, as well as time-constrained players and those wishing to invest substantially more intellectual energy in a long campaign.
 
 ### Context and access effects
 
