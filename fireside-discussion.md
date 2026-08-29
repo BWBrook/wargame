@@ -237,6 +237,62 @@ The following closes Barry's opening unprompted survey. Paragraph breaks have be
 
 > Definitely, the advisor should give an in-world assessment, not exact probabilities. I'm quite strong on that fact. It should feel immersive, like you're actually a field commander in this fantasy setting, making decisions under uncertainty. So we should never expose the player. I don't think ever expose the player to the underlying mathematics. It should all be framed in terms of what if they were there making these decisions, with advisors of various competencies and so forth. Because in a real war, certainly in ancient wars, probabilities were likely never offered, except maybe you have a greater than even chance of winning this. But, you know, beyond that, there wasn't sort of precise calculations. So even if the mechanics underpinning our combat model has those calculations, and a player can learn to infer them through interpreting more qualitative advice, they're not actually presented with those in an immersion-breaking way.
 
+#### Q8 — What is the boundary between visible state and hidden mathematics?
+
+**Prompt:** Should concrete information that a real commander could reasonably know remain plainly visible, while abstract combat predictions, probabilities and formulas are translated into qualitative language and visual cues?
+
+**Barry's direct response:**
+
+> I agree with your instinct.
+
+#### Q9 — What should an area on the strategic map mean?
+
+**Prompt:** Should areas feel principally like authored, named places—provinces, mountain passes, forests, ports and sea lanes—whose irregular connections create the strategy, or like smaller operational spaces that function much like irregular hexes? Should the player think primarily in terms of holding places or measuring movement and formation position?
+
+**Barry's direct response:**
+
+> I prefer them to feel like real authored areas, in much the same way that Battle of the Bulge and Conquest of Nerath approach it. I think a hex-based approach can work, but it is less suited to the type of game we're envisaging, where we want it to feel real to the player, as though they were really a fantasy commander, rather than a game. So, for example, not showing direct combat odds changes it from a true number-crunching game, which some war games are, and validly are, through to more like role-playing a commander in an imagined war situation, with all of the imperfections that go along with that. Similarly, landscapes are not divided into hexes, and indeed even field commanders in wars such as World War I were more thinking in terms of zones and areas of control rather than dividing a landscape into uniform sub-units. At least that's my understanding. So the intellectual foundation of the game should always be that the player feels like they've been put in this real albeit fantasy situation, with all of the constraints that go along with that, and that it should feel like a simulation or a role play rather than primarily a mechanics-based game that can be solved.
+
+#### Q10 — What happens when opposing armies enter the same area?
+
+**Prompt:** Should an area be capable of remaining contested, with both sides maintaining forces and a front there across multiple turns, or should entry normally force an immediate battle that leaves one side controlling the area?
+
+**Barry's direct response:**
+
+> I think entry should normally force an immediate battle. That's a reasonable abstraction that other games that use area-based approaches take as well. There are too many other sub-complications that arise by having armies from opposing sides occupying the same area for multiple turns. I know in a sense that could be more realistic, but at that point it almost feels like an area devolves into sub-areas, which is a level of detail, at least for now, that I don't think we want to get into. But when determining likelihoods of success, for example, a player might be able to simulate moving units into a new zone to calculate odds with different types or numbers of units entering the zone and caps on those, which represent real-world constraints in that but also allows them to cycle through different scenarios as though they were planning over a combat map with their advisors. But once they commit to a given deployment, at that point the battle begins, and after that nothing is reversible. Does that make sense? We would also have to make sure that moving units into and out of an area to check combat odds, or the equivalent, doesn't alter fog of war, for example. So that there can't be any intelligence gathering simply by hypothetically moving units into and out of an area. Until a commit is done, nothing like that should be revealed.
+
+#### Q11 — At what scale should orders be committed?
+
+**Prompt:** Should each engagement resolve immediately after its order is committed, or should orders be locked across the map before resolution, introducing simultaneous uncertainty about the opponent's allocation of forces?
+
+**Barry's direct response:**
+
+> Across the map, like Victory in the Pacific. I love that mechanic of simultaneous uncertainty. So the defender could have units within a region that the attacker has to plan for, but there will also be an uncertainty as to whether they're going to be reinforced, for example, or even swapped out with other units. I think that adds a dynamism and an element of broader tactical judgment, but also scarcity, that is not found all that commonly in strategy games, but I think works well and could be exploited nicely in a fantasy setting Where intelligence is probably more limited than in a modern war, which is different somewhat to the situation in the Pacific, where the problem was the vast areas that were required to cover for surveillance, but has the same sort of net effect.
+
+#### Q12 — May formations receive reactive orders?
+
+**Prompt:** Must every reinforcement be secretly committed to a destination before orders are revealed, or may formations receive limited reserve or response orders that activate when an enemy movement is discovered without undermining simultaneous allocation?
+
+**Barry's direct response:**
+
+> I like the idea of reactive commands in Dungeons & Dragons, for example. It's akin to a prepared action or a held action. But as you say, if it's too flexible, it could undermine the simultaneous allocation uncertainty. So perhaps we need some strong constraint on it. It could be a limited number of those per turn, or it could be limited in some other way.
+
+#### Q13 — Should exceptional field commanders broaden reactive orders?
+
+**Prompt:** Should an ordinary held order have to name one specific threat and response, while only exceptional commanders may interpret broader instructions such as supporting whichever adjacent area is attacked?
+
+**Barry's direct response:**
+
+> Yes, I think that's good. And it, in some ways, rebalances the initiative that the offensive side otherwise has. The defender doesn't know across their front where the attacker might concentrate their forces. But to counterbalance that, the defender has the opportunity to prepare a constrained set of reactions that allow for some form of counter to that unexpected deployment. It's really potentially quite a nice mechanic. As for your question, it's a difficult one. When you say exceptional commanders, are you referring to command units that may have a given experience rating, for example? That could be an interesting sub-mechanic in itself. Advancing and promoting and allocating field commanders to given divisions or other units is again management of scarce resources and potentially provides greater flexibility in a certain zone that might be critical, but remains a limited resource in that way in a natural sense, in that those types of commanders are naturally rare. I'd be interested in your thoughts on what you think would work, given your review of all of the background games that we started the project on.
+
+#### Q14 — Who resolves competing triggers under a broad command intent?
+
+**Prompt:** When several valid triggers occur simultaneously, should the player predeclare a strict priority order, or should choosing a broader instruction deliberately mean trusting the field commander's documented judgment?
+
+**Barry's direct response:**
+
+> Lovely. I think the way you've described all of that and the checks and balances is perfect and should make for excellent gameplay, at least as best as we can anticipate a priori. As to your question, I think we should deliberately trust the commander's documented judgment, because otherwise, having a player try and come up with a pre-declared strict priority order once again invokes our admonition against over-commitment of a player's attention to what ultimately are overly detailed matters. So it's that trade-off between a player's attention that remains interesting versus the need in this case to micromanage every front against all possible contingencies that they might want to anticipate.
+
 ### Context and access effects
 
 _Deferred._
