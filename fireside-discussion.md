@@ -351,6 +351,32 @@ The following closes Barry's opening unprompted survey under the same light-norm
 >
 > Potentially, tutorials and guidance—or even lockouts requiring the player to win at one level before moving to the next—could support that progression. I am brainstorming, but these levels of delegation and influence could create an interesting evolution of the experience, encouraging replay from different perspectives without intermixing them too much. They could accommodate novices and grognards, as well as time-constrained players and those wishing to invest substantially more intellectual energy in a long campaign.
 
+#### Q21 — How should orders from above, victory, and map scope interact?
+
+**Prompt:** If higher command gives a field commander an order they consider disastrous—such as attacking prematurely, holding an indefensible frontier, or releasing a treasured formation elsewhere—must they obey, may they petition for different orders, or may they disobey and accept the professional and political consequences?
+
+**Barry's direct response:**
+
+> I think this makes the game even more interesting and increases replayability. If high command issues disastrous orders to field commanders, they need to determine how best to implement them. If they disobey, that changes the nature of what would be considered a win or loss and might undermine other factors such as prestige. There cannot be an easy route, because historically there never was. Disobeying higher command would need to be an exceptional decision carrying serious consequences and only a small chance of high payoff.
+>
+> I am not yet sure how that should be represented, and it might be better placed on an implement-later wish list. In that case, the default should be that the player is obliged to follow orders from higher authority. Victory would be measured by how inventively and effectively they execute those orders under the circumstances. This resembles Unity of Command, where objectives had timed targets that were often plausibly unrealistic. With intelligent manoeuvre and unit allocation they could nevertheless be met: they were possible, but not obviously sensible. That allows the player to shine even when circumstances are against them.
+>
+> The more we discuss this, the more I think we can have a grand-strategic map together with scenarios operating in particular sections of that map. This would be especially relevant to field command: the player would not operate across the entire front like Eisenhower, but with a particular army group in a particular region, more like Patton. The game could support both perspectives. Levels of authority might also influence the size of the map being managed. At one level, the player might represent the combined judgment of multiple field marshals, or their equivalents, across a long front. In a scenario at another level, they would be a single field commander with constrained forces in one region and narrower objectives.
+>
+> This could provide considerable flexibility, allowing players to choose short games with narrow objectives or large games with broad, overarching goals.
+
+#### Q22 — Should regional scenarios remain self-contained before campaign handoffs are attempted?
+
+**Prompt:** Should regional scenarios initially be self-contained snapshots of the larger war, or should a grand campaign hand regional crises to the player and feed their results back into the continuing world?
+
+**Barry's direct response:**
+
+> My instinct is the same as yours: self-contained scenarios first, all sharing the canonical map and simulation model. I like the idea of nested campaign handoffs, which could allow players to choose how strongly the greater war is influenced by specific regional actions, but that should come in later iterations.
+>
+> As we develop and test the game, we can accumulate a substantial wish list of possible additions. These can later be assessed in terms of their effects on play and playability, and how easy or difficult they would be to implement. They can remain a pool of possibilities that, once the core game is running, might be implemented by us or by other contributors if the project is open source. They do not all need to be mapped into the initial product.
+>
+> That is one of the great advantages of a progressively developed open-source game, akin to The Battle for Wesnoth: not everything needs to be done immediately. The project can accumulate over time through experience, playtesting, and contributions.
+
 ### Context and access effects
 
 _Deferred._
