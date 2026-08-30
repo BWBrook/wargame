@@ -403,6 +403,34 @@ The following closes Barry's opening unprompted survey under the same light-norm
 
 > Yes, definitely. There should be intuitive “good” and “bad” coalitions with alternative diplomatic arsenals.
 
+#### Q26 — Does joining a coalition preserve national agency?
+
+**Prompt:** Should voluntarily recruited allies normally remain dependable once committed, while coerced subjects remain conditionally loyal and potentially rebel or defect if the threatening coalition becomes weak?
+
+**Barry's direct response:**
+
+> Good. That strikes me as a rich and interesting framework, and the asymmetry feels right. It walks the line between realism and overt complexity: we need to make simplifying assumptions, while still representing that allied nations retain decision-making power after joining a coalition rather than being absorbed immediately into a monolithic entity. That was apparent in the alliance changes of the Second World War—for example, Italy and later several Eastern European nations as the tide turned against Nazi Germany.
+
+#### Q27 — What political and economic state follows invasion and conquest?
+
+**Prompt:** What should happen politically, militarily, and economically when a neutral or coalition nation is invaded and defeated?
+
+**Barry's direct response:**
+
+> The hybrid control model sounds exactly right. Another matter is what happens when either side invades a neutral nation. In War of the Lance, the neutral immediately allied with the invader's opponent. I think that is a reasonable first assumption and keeps bookkeeping relatively simple.
+>
+> It also raises the question of what follows conquest—whether the defeated country began neutral or belonged to a coalition whose other members remain at war. The conquered nation might produce troops or machinery for the conqueror and become part of the conqueror's economy. Conscription, collaboration, or fifth columns might make some of its resources useful, but the arrangement would remain diplomatically fragile and likely face resistance. Vichy France offers an example: it collaborated with the German conqueror in important respects without becoming a reliably effective ally and remained troubled by internal resistance.
+>
+> We need to consider how that might be represented simply. The finer details may not belong in the initial implementation and could remain a later feature; I am raising the issue here for completeness.
+
+#### Q28 — What occupation detail belongs in the core game?
+
+**Prompt:** Should the core represent conquered nations through reduced staff-managed economic value and an abstract occupation burden, while deferring collaboration forces, resistance operations, and detailed occupation policy?
+
+**Barry's direct response:**
+
+> Yes, that definitely feels right.
+
 ### Context and access effects
 
 _Deferred._
