@@ -377,6 +377,32 @@ The following closes Barry's opening unprompted survey under the same light-norm
 >
 > That is one of the great advantages of a progressively developed open-source game, akin to The Battle for Wesnoth: not everything needs to be done immediately. The project can accumulate over time through experience, playtesting, and contributions.
 
+#### Q23 — Should the war have a canonical chronology or an emergent history?
+
+**Prompt:** Should the fantasy world possess a canonical chronology of the war, with scenarios representing recognised phases and regional crises within that history—or should only the pre-war mythology be canonical, with every campaign creating its own history from the moment hostilities begin?
+
+**Barry's direct response:**
+
+> I think we should leave two possibilities open. Scenario-based play should be embedded within a canonical chronology of the war. That allows each scenario to make sense within a broader established context and potentially form the basis of a linked campaign.
+>
+> A full strategic game, however, should be free to unfold as it will. The canonical setting establishes the baseline and starting positions, but from there the war develops through play, more like The Russian Campaign. There is also no reason that we could not eventually provide different counterfactual starting positions for the full strategic campaign, but those should remain deferred possibilities rather than part of the core implementation.
+
+#### Q24 — Should opening political alignments be fixed or variable?
+
+**Prompt:** At the canonical grand-campaign opening, should the initial belligerents, neutral nations, and diplomatic leanings be fixed and authored while subsequent diplomacy allows divergence—or should some opening allegiances and sympathies vary between games?
+
+**Barry's direct response:**
+
+> I think they should be fixed, as they were in War of the Lance. A core of allied and enemy nations should begin in established coalitions, together with a large pool of neutral nations that lean in one direction or another and remain available for potential alliances. That is very much in the spirit of how War of the Lance developed, and I like that feature.
+
+#### Q25 — Should the opposing coalitions possess asymmetric diplomatic instruments?
+
+**Prompt:** Should both coalitions court neutral nations through essentially the same diplomatic mechanism, or should they share a simple core grammar while possessing different instruments—for example, coercion and territorial momentum on one side, and legitimacy and coalition resistance on the other?
+
+**Barry's direct response:**
+
+> Yes, definitely. There should be intuitive “good” and “bad” coalitions with alternative diplomatic arsenals.
+
 ### Context and access effects
 
 _Deferred._
