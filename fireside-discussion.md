@@ -499,6 +499,26 @@ The following closes Barry's opening unprompted survey under the same light-norm
 >
 > The more we discuss it, the more Greece appeals. Starting there might make the original fantasy vision more realisable and ultimately a better product, if or when it follows.
 
+#### Q36 — How should fleets fit alongside land formations?
+
+**Prompt:** Should fleets use the same language of intent as armies and be directly controlled pieces, with coordination between land and sea part of the player's central job?
+
+**Barry's direct response:**
+
+> Yes: fleets should be commanded through the same language of intent and should be controllable pieces alongside land formations.
+>
+> We need to consider how fleets are represented, including different classes of ships or smaller formations that allow Salamis-like situations. Potential examples include triremes, penteres, penteconters, and so on. Naval warfare should be just as interesting as commanding land armies.
+>
+> There are also trade-offs between investment in navies and armies, given available resources, the locations of city-states, and similar considerations.
+
+#### Q37 — Is the squadron the right naval command unit?
+
+**Prompt:** Should several distinctive squadrons be the player's controllable naval formations, with individual ship manoeuvres resolved by their commanders? Supporting proposals included crew quality and readiness, authored naval geography, and staff-mediated investment trade-offs within the player's campaign authority.
+
+**Barry's direct response:**
+
+> Yes, squadron level sounds just right, as do your other elaborations!
+
 ### Context and access effects
 
 _Deferred._
@@ -512,6 +532,12 @@ _Deferred. Keep clearly separate from direct recollection._
 Relevant neighbouring designs checked on publisher/developer pages: [Hegemony Gold](https://longbowgames.com/hegemony/) combines Greek historical campaigns, a sandbox, logistics, and continuous geography; [Pericles](https://www.gmtgames.com/p-587-pericles-the-peloponnesian-wars-460-400-bc.aspx) combines coalition politics with secret placement of issues across theatres; [Field of Glory: Empires](https://www.slitherine.com/product/field-of-glory-empires) is a grand-strategic member of the franchise, with optional tactical battle export. These establish relevant precedents, not an exhaustive market review or a finding that the proposed game already exists.
 
 **Setting direction accepted following Q35 — 6 September 2026:** Ancient Greece, within a 500–400 BC historical frame, is now the intended first setting and is appealing as a game in its own right. This supersedes the exploratory status recorded at Q34. The century is a frame for possible scenario openings, not a commitment to one century-long campaign or to implementing every conflict. The first opening scenario remains unchosen. Historical conditions should help assess the plausibility of relationships and constraints while allowing counterfactual outcomes. Naval warfare is part of the setting's appeal and needs to inform the command model. A later fantasy game or Roman Britain setting remains a possibility, not a present implementation requirement or a reason to build speculative general-purpose systems.
+
+**Naval direction following Q36 — 7 September 2026:** Direct player control of fleets through the same language of intent as land formations is agreed. Naval play should have comparable decision interest, and army-versus-navy investment should matter in relation to resources and geography. Ship classes and the size and composition of naval formations remain open. A proposed representation is the squadron: several ships forming a coherent commanded piece, with multiple squadrons cooperating in authored sea areas. Crew quality, readiness, commander judgement, and restricted or open waters could distinguish forces even where they share a ship type. Salamis-like situations should be possible through geography and commitments within the existing command scale; this is not an agreement to introduce a separate ship-by-ship tactical game. Investment decisions should remain consistent with the player's established campaign authority and staff delegation.
+
+Historical scope note: Barry's ship examples above are exploratory, not an approved roster. Penteres (quinqueremes) are traditionally associated with Dionysius I's construction programme around 399 BC, outside the selected 500–400 BC frame; the early invention claim is itself disputed. See [Treccani's quinquereme entry](https://www.treccani.it/enciclopedia/quinquereme_%28Enciclopedia-Italiana%29/) and [Diodorus XIV.41–42, with the edition's note 3](https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/14D%2A.html#41). Scenario-specific rosters still require research.
+
+**Naval representation accepted following Q37 — 7 September 2026:** The squadron is the agreed controllable naval unit. Multiple squadrons can cooperate as a fleet or operate separately, while commanders resolve individual ship manoeuvres. Barry also endorses the supporting proposals from the Q36 discussion: distinctive crew quality and readiness, commander judgement, authored naval geography, and investment in building, crewing, maintaining, and basing fleets, with staff explaining opportunity costs and the player's campaign authority governing decisions or requests. Exact squadron sizes, ship rosters, and detailed mechanics remain to be determined.
 
 ### Counterexamples and unresolved tensions
 
