@@ -431,6 +431,38 @@ The following closes Barry's opening unprompted survey under the same light-norm
 
 > Yes, that definitely feels right.
 
+#### Q29 — What does an on-map military unit represent?
+
+**Prompt:** Should each counter represent a coherent formation or host with a clear primary identity and perhaps one commander, hero, or specialist attachment, while several formations cooperate within an area—or should a broader mixed army be the fundamental movable unit?
+
+**Barry's direct response:**
+
+> Your proposed model sounds right and is what I had envisaged. It is very similar to War of the Lance and, to some degree, Warlords. Both are exemplars for the kind of system we ultimately want to develop, although each has divergences or defects we would wish to correct. At the unit level, what we want is therefore close to what those games represent. The Battle for Wesnoth may be similar as well, although it has been many years since I played it and I never played it extensively.
+
+#### Q30 — Should formation capacity vary between authored areas?
+
+**Prompt:** Should small, clearly displayed differences in formation capacity distinguish authored areas, so that a narrow pass accommodates fewer formations than open country without adding much handling burden?
+
+**Barry's direct response:**
+
+> I definitely concur that small, clearly displayed differences between areas would make their geography strategically meaningful without much handling burden. It is part of the interest and value of having authored areas!
+
+#### Q31 — Can converging attacks exploit geography to concentrate force?
+
+**Prompt:** Should formations from several neighbouring areas be able to converge on one enemy area for a coordinated attack, with geography limiting how much force can arrive and commander quality affecting coordination?
+
+**Barry's direct response:**
+
+> Yes, that is my inclination too. Geography can also dictate the degree of force concentration: think of the blockage at Thermopylae versus the open engagement at Plataea.
+
+#### Q32 — Should defeat normally cause retreat rather than destruction?
+
+**Prompt:** Should a beaten formation usually retreat with losses and diminished cohesion when a viable escape route exists, with destruction or surrender more likely when trapped or already badly depleted?
+
+**Barry's direct response:**
+
+> Yes, that fits my preference exactly.
+
 ### Context and access effects
 
 _Deferred._
