@@ -463,6 +463,42 @@ The following closes Barry's opening unprompted survey under the same light-norm
 
 > Yes, that fits my preference exactly.
 
+#### Q33 — Should rout, pursuit, and combat intent shape battle outcomes?
+
+**Prompt:** Should a small set of precommitted orders express the player's balance between holding ground and preserving forces, with commanders and circumstances determining how successfully that intent is executed?
+
+**Barry's direct response:**
+
+> We should probably also have a rout mechanic. In ancient warfare, my understanding is that most battlefield losses came when a formation broke and was chased down by cavalry after the battle itself had been decided. Although that should not be a uniform outcome, it should be a possibility, potentially related to experience, cohesion, and similar factors.
+>
+> Orders that change the balance between risk and preservation are also important: an offensive or defensive mindset, trying to break the enemy, controlling losses, or fighting a war of attrition. The degree of control you describe therefore feels right to me.
+
+#### Q34 — Could ancient Greece provide the first setting for the game?
+
+**Context:** Barry raises a possible change of setting during discussion of geography, rout, pursuit, and command. This is an exploratory proposal, not a settled replacement of the fantasy setting.
+
+**Barry's direct reflection:**
+
+> This discussion has been useful, and it makes me wonder whether the first and canonical iteration might be better served by a counterfactual historical setting, anchored in real-world geography, rather than an invented fantasy world. Ancient Greece seems a strong candidate. We could have scenarios for the Persian invasions and the Peloponnesian War, as well as fictitious alliances and wars between city-states based on the configuration at a particular historical moment.
+>
+> We keep using historical examples to illustrate concepts that would translate naturally into this game. I am not aware of a game quite like this, although there are titles such as Field of Glory, which I associate more with tactical battles. A Greek setting would also remove the need to create an entire mythology. We would instead represent Greece and potentially Macedon around an appropriate period—perhaps 450–250 BC, although I am recalling those dates tentatively—with city-states and counterbalancing alliances such as Sparta and Athens.
+>
+> This could let us prove the systems in a setting immediately familiar to players, while retaining flexibility and laying the groundwork for a later fantasy setting or overlay. Does that approach resonate, or do you see problems with it?
+
+#### Q35 — Is ancient Greece an appealing first setting in its own right?
+
+**Prompt:** Would commanding this historical world excite you as much as the original fantasy setting, even if a fantasy version never followed?
+
+**Barry's direct response:**
+
+> Yes. Let us bracket the period as 500–400 BC, encompassing the Persian invasions, the Peloponnesian War, and other counterfactual scenarios. This historical world would excite me as much as the original fantasy setting, even if the fantasy version never followed.
+>
+> I am attracted to the way an anchor in reality makes some otherwise difficult work easier. A moderately realistic ancient setting is also close to the ancient and medieval warfare that much fantasy fiction draws upon. Greece offers a constrained but complex proving ground: a relatively small area, varied terrain, and a strong naval element that I find attractive.
+>
+> If we can get the engine working well there, we could learn lessons for a future fantasy version while attracting players who already know something of the period. Their interest might encourage further work on fantasy or another historical setting. Roman Britain also interests me, including the conquest and campaigns from Agricola in the first century AD through Septimius Severus in the third.
+>
+> The more we discuss it, the more Greece appeals. Starting there might make the original fantasy vision more realisable and ultimately a better product, if or when it follows.
+
 ### Context and access effects
 
 _Deferred._
@@ -470,6 +506,12 @@ _Deferred._
 ### Joint interpretations
 
 _Deferred. Keep clearly separate from direct recollection._
+
+**Exploratory setting assessment following Q34 — 6 September 2026:** Ancient Greece could supply recognisable geography, political interests, and scenario context for the command model. It would replace invented-world authorship with historical research and abstraction choices. A single dated opening is preferable to treating 450–250 BC as one political or military setting. The Persian invasion scenarios would require earlier dates. Naval operations, supply, and fortified cities need consideration early; the proposed simple good-versus-evil diplomatic distinction would need revisiting, as would heroes and quests. A historical release could test shared command and combat systems, but would not validate fantasy-specific mechanics such as flight, magic, and exceptional creatures. This proposal remains open for discussion.
+
+Relevant neighbouring designs checked on publisher/developer pages: [Hegemony Gold](https://longbowgames.com/hegemony/) combines Greek historical campaigns, a sandbox, logistics, and continuous geography; [Pericles](https://www.gmtgames.com/p-587-pericles-the-peloponnesian-wars-460-400-bc.aspx) combines coalition politics with secret placement of issues across theatres; [Field of Glory: Empires](https://www.slitherine.com/product/field-of-glory-empires) is a grand-strategic member of the franchise, with optional tactical battle export. These establish relevant precedents, not an exhaustive market review or a finding that the proposed game already exists.
+
+**Setting direction accepted following Q35 — 6 September 2026:** Ancient Greece, within a 500–400 BC historical frame, is now the intended first setting and is appealing as a game in its own right. This supersedes the exploratory status recorded at Q34. The century is a frame for possible scenario openings, not a commitment to one century-long campaign or to implementing every conflict. The first opening scenario remains unchosen. Historical conditions should help assess the plausibility of relationships and constraints while allowing counterfactual outcomes. Naval warfare is part of the setting's appeal and needs to inform the command model. A later fantasy game or Roman Britain setting remains a possibility, not a present implementation requirement or a reason to build speculative general-purpose systems.
 
 ### Counterexamples and unresolved tensions
 
