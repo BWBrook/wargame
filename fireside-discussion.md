@@ -545,6 +545,14 @@ The following closes Barry's opening unprompted survey under the same light-norm
 
 > I definitely agree with your inclination on supply, although supplying forces and transporting troops might have different logistical constraints. I think we have discussed that distinction in reasonable enough detail already. Supply should probably come to the foreground during those moments of stress or pressure.
 
+#### Q41 — Can a fortified city hold out after a nearby field defeat?
+
+**Prompt:** Should defeating an army in an area leave its fortified city potentially uncaptured, allowing the player to besiege it, attempt a costly assault, or bypass it while accepting the remaining threat?
+
+**Barry's direct response:**
+
+> Yes, for fortified cities, that sounds correct. Even a well-supplied garrison can be a thorn in the side of a commander who was victorious in the nearby field.
+
 ### Context and access effects
 
 _Deferred._
@@ -568,6 +576,8 @@ Historical scope note: Barry's ship examples above are exploratory, not an appro
 **Sea-transport abstraction accepted following Q38 — 7 September 2026:** The player directs the movement of selected land formations by sea, choosing the destination and escort and deciding whether to accept the operation's risks. Staff handle shipping and loading arrangements and communicate meaningful capacity, route, and landing constraints. Transport capacity remains a real limitation; assigning soldiers to individual vessels is not required. This applies the established complexity-versus-delegation philosophy to sea transport and amphibious operations without yet specifying detailed landing or combat mechanics.
 
 **Geographic scope and supply direction following Q39–Q40 — 13 September 2026:** Barry's further map study reinforces the appeal of the Peloponnesian War setting, particularly its geographically fragmented alliances. Asia Minor's city-states should be represented as proper playable areas; a more abstract representation of the wider Persian Empire remains a possibility. The description of Persia as initially unallied is a scenario-opening observation, not a rule of permanent neutrality or a fixed alignment for every scenario. No exact opening date or Persian intervention mechanic is settled here. Staff-managed logistics with clear qualitative advice is endorsed, with supply chiefly foregrounded under operational stress. This concerns player attention rather than suspending supply constraints outside crises. Supplying forces and transporting troops should retain their distinct constraints; no additional detailed logistics subsystem is agreed.
+
+**Fortified-city distinction accepted following Q41 — 13 September 2026:** Victory over a field army does not automatically capture a fortified city in the same area. A surviving garrison can continue to hold the city and pose an operational problem, especially while well supplied. Besieging, attempting a costly assault, or bypassing while accepting the remaining threat are the agreed broad command choices. Detailed rules for containment, sorties, blockade, and control of nearby routes remain open.
 
 ### Counterexamples and unresolved tensions
 
