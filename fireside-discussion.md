@@ -553,6 +553,44 @@ The following closes Barry's opening unprompted survey under the same light-norm
 
 > Yes, for fortified cities, that sounds correct. Even a well-supplied garrison can be a thorn in the side of a commander who was victorious in the nearby field.
 
+#### Q42 — What playing time should a regional scenario target?
+
+**Context:** Barry endorses the proposed final discussion topics and first-playable direction: scenario selection, pace and endings, the practical intelligence picture, and changes required by the Greek setting, followed by a focused comparative synthesis and compact implementation brief.
+
+**Prompt:** What would feel like a satisfying total playing time for a self-contained regional scenario?
+
+**Barry's direct response:**
+
+> Good overview; I agree with all of this. Say 10–15 minutes per turn and 10–15 turns, so around 2–3 hours from the human player's perspective?
+
+#### Q43 — Could the second Persian invasion be the first scenario?
+
+**Prompt:** Is there a particular episode or theatre you would most enjoy commanding first?
+
+**Barry's direct response:**
+
+> Maybe the second Persian invasion of Greece?
+
+#### Q44 — Should Greek coalition defence in 480 BC be the first large scenario?
+
+**Prompt:** Would commanding the defending Greek coalition be the preferred first experience, centring the opening scenario on 480 BC and leaving 479 for later?
+
+**Barry's direct response:**
+
+> Yes. You have articulated why I thought this would be a good first scenario. It is relatively simple in several respects: the invading Persians are a predefined force largely uninvolved in diplomacy, while the Greek coalition must hold itself together, defend, and eventually meet that large force in at least one decisive battle.
+>
+> I agree with centring the first large scenario we plan on 480 BC and leaving the details of 479 for a follow-up scenario. Those could later be linked into a second invasion of Greece campaign. The first invasion of Greece could also become another scenario.
+>
+> This prepares us for what I expect to be the most complicated but interesting scenario or campaign: the Peloponnesian War itself, with its extended duration, different phases, and politically much greyer character.
+
+#### Q45 — Should victory reward outcomes rather than a prescribed historical sequence?
+
+**Prompt:** Should victory in the 480 BC scenario reward checking the invasion while preserving a viable coalition and fighting force, without requiring a named decisive battle or making the loss of a particular city an automatic defeat?
+
+**Barry's direct response:**
+
+> Yes, that fits! As scenario designers we set the stage, but don't write the subsequent play.
+
 ### Context and access effects
 
 _Deferred._
@@ -578,6 +616,16 @@ Historical scope note: Barry's ship examples above are exploratory, not an appro
 **Geographic scope and supply direction following Q39–Q40 — 13 September 2026:** Barry's further map study reinforces the appeal of the Peloponnesian War setting, particularly its geographically fragmented alliances. Asia Minor's city-states should be represented as proper playable areas; a more abstract representation of the wider Persian Empire remains a possibility. The description of Persia as initially unallied is a scenario-opening observation, not a rule of permanent neutrality or a fixed alignment for every scenario. No exact opening date or Persian intervention mechanic is settled here. Staff-managed logistics with clear qualitative advice is endorsed, with supply chiefly foregrounded under operational stress. This concerns player attention rather than suspending supply constraints outside crises. Supplying forces and transporting troops should retain their distinct constraints; no additional detailed logistics subsystem is agreed.
 
 **Fortified-city distinction accepted following Q41 — 13 September 2026:** Victory over a field army does not automatically capture a fortified city in the same area. A surviving garrison can continue to hold the city and pose an operational problem, especially while well supplied. Besieging, attempting a costly assault, or bypassing while accepting the remaining threat are the agreed broad command choices. Detailed rules for containment, sorties, blockade, and control of nearby routes remain open.
+
+**First-playable direction endorsed with Q42 — 13 September 2026:** Barry agrees with the proposed short final discussion and subsequent focused synthesis against the existing research before implementation. The recommended first-playable direction is a bounded Peloponnesian War scenario bringing land movement, naval control, and a fortified objective together; its precise theatre, date, side, and command role remain unchosen. Endorsed defaults include single-player against a computer opponent, dependable save/resume, and an uncluttered map with readable counters and staff reports. The proposed intelligence model uses known geography, imperfect and potentially stale enemy reports, advisers distinguishing observation from inference, and informative post-turn accounts without revealing all enemy activity. Greek political interests and obligations replace the earlier good-versus-bad coalition framing; fantasy heroes and quests are parked while commanders retain individual qualities. Most wider politics would initially operate in the background through orders, support, and allied cooperation. Multiplayer remains outside the initial default rather than ruled out permanently.
+
+**Scenario pacing following Q42 — 13 September 2026:** The proposed human-player pacing is 10–15 minutes per turn over 10–15 turns, with a typical regional scenario targeting roughly 2–3 hours. The full arithmetic range is 100–225 minutes (1 hour 40 minutes to 3 hours 45 minutes); a central example is twelve twelve-minute turns, or 144 minutes. These are playtime targets to test, not a mandatory turn timer or a requirement to fill quiet turns with work. The historical time represented by a turn remains undecided and is distinct from the player's thinking time.
+
+**First-scenario candidate following Q43 — 13 September 2026:** Barry proposes the second Persian invasion of Greece as a possibility, reopening the provisional Peloponnesian War opening recommended at Q42 while remaining within the agreed 500–400 BC setting. The invasion spans 480–479 BC: Thermopylae, Artemisium, and Salamis belong to the 480 campaign, with Plataea and Mycale in the following year; see [Encyclopaedia Iranica, Salamis](https://www.iranicaonline.org/articles/salamis/). A proposed first playable scenario would focus on the 480 BC defence of central and southern Greece, allowing land–sea coordination, constrained geography, retreat, and supply pressure to emerge through play. Greek coalition command is a recommendation, not yet a selected player side; exact opening, boundaries, objectives, and turn duration remain open. Historical battles and outcomes would not be mandatory scripted events. The 479 campaign could be a later scenario, and prolonged siege play need not be forced into the first one merely to exercise every planned mechanic.
+
+**First large scenario selected following Q44 — 13 September 2026:** Greek coalition defence against the second Persian invasion in 480 BC is now the agreed first large scenario, superseding the tentative status at Q43 and the earlier Peloponnesian War opening recommendation. The Persian invading force is predefined and has a limited diplomatic role in this scenario; this does not prescribe its operational choices or the historical outcome. Holding the Greek coalition together, defending, and creating an opportunity for decisive battle define the intended challenge. Exact victory conditions, command-authority boundaries, geographic limits, opening position, and historical turn duration remain to be specified. A standalone 479 follow-up, later linkage into a second-invasion campaign, and a separate first-invasion scenario are future possibilities. The politically richer, longer Peloponnesian War remains a later ambition. Choosing the first large scenario does not require the first technical prototype to implement that entire scenario at once, nor does it reverse the agreed standalone-before-linked-campaign approach.
+
+**Outcome-based scenario design accepted following Q45 — 13 September 2026:** Scenario authors establish opening conditions, constraints, and objectives; player and opponent decisions determine the subsequent course. For 480 BC, the agreed victory direction is to check the invasion while retaining a viable coalition and fighting force. Decisive battle is a means to that end rather than a required named event. Losing a particular city is not automatically defeat, and the player need not reproduce the historical sequence. Exact thresholds and assessment rules remain implementation-design work.
 
 ### Counterexamples and unresolved tensions
 
