@@ -519,6 +519,32 @@ The following closes Barry's opening unprompted survey under the same light-norm
 
 > Yes, squadron level sounds just right, as do your other elaborations!
 
+#### Q38 — How much control should the player have over sea transport?
+
+**Prompt:** Should the player select the formations, destination, and escort while staff arrange shipping and loading, explain transport capacity, route exposure, and landing constraints, and leave the player to decide whether to proceed, delay, or change the plan?
+
+**Barry's direct response:**
+
+> Yes, that fits, as does the proposed level of abstraction, in keeping with our general philosophy on the complexity-versus-delegation trade-offs.
+
+#### Q39 — What does the Peloponnesian War map suggest about geographic scope?
+
+**Context:** Barry adds a setting observation before answering the supply question.
+
+**Barry's direct reflection:**
+
+> Having studied the Peloponnesian War map further, it looks like a lovely setup for this game. The historical allied nations were somewhat fragmented across Greece, Macedonia, Asia Minor, and major islands, with the Persian Empire as an initially unallied monolith.
+>
+> We can probably represent the Persian Empire somewhat abstractly, but we need to capture the city-states of Asia Minor properly as areas.
+
+#### Q40 — When should supply become a foreground concern?
+
+**Prompt:** Should staff manage logistics and provide qualitative advice, with supply pressure a constant foreground consideration or chiefly prominent during deep advances, sieges, and disrupted sea routes?
+
+**Barry's direct response:**
+
+> I definitely agree with your inclination on supply, although supplying forces and transporting troops might have different logistical constraints. I think we have discussed that distinction in reasonable enough detail already. Supply should probably come to the foreground during those moments of stress or pressure.
+
 ### Context and access effects
 
 _Deferred._
@@ -538,6 +564,10 @@ Relevant neighbouring designs checked on publisher/developer pages: [Hegemony Go
 Historical scope note: Barry's ship examples above are exploratory, not an approved roster. Penteres (quinqueremes) are traditionally associated with Dionysius I's construction programme around 399 BC, outside the selected 500–400 BC frame; the early invention claim is itself disputed. See [Treccani's quinquereme entry](https://www.treccani.it/enciclopedia/quinquereme_%28Enciclopedia-Italiana%29/) and [Diodorus XIV.41–42, with the edition's note 3](https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Diodorus_Siculus/14D%2A.html#41). Scenario-specific rosters still require research.
 
 **Naval representation accepted following Q37 — 7 September 2026:** The squadron is the agreed controllable naval unit. Multiple squadrons can cooperate as a fleet or operate separately, while commanders resolve individual ship manoeuvres. Barry also endorses the supporting proposals from the Q36 discussion: distinctive crew quality and readiness, commander judgement, authored naval geography, and investment in building, crewing, maintaining, and basing fleets, with staff explaining opportunity costs and the player's campaign authority governing decisions or requests. Exact squadron sizes, ship rosters, and detailed mechanics remain to be determined.
+
+**Sea-transport abstraction accepted following Q38 — 7 September 2026:** The player directs the movement of selected land formations by sea, choosing the destination and escort and deciding whether to accept the operation's risks. Staff handle shipping and loading arrangements and communicate meaningful capacity, route, and landing constraints. Transport capacity remains a real limitation; assigning soldiers to individual vessels is not required. This applies the established complexity-versus-delegation philosophy to sea transport and amphibious operations without yet specifying detailed landing or combat mechanics.
+
+**Geographic scope and supply direction following Q39–Q40 — 13 September 2026:** Barry's further map study reinforces the appeal of the Peloponnesian War setting, particularly its geographically fragmented alliances. Asia Minor's city-states should be represented as proper playable areas; a more abstract representation of the wider Persian Empire remains a possibility. The description of Persia as initially unallied is a scenario-opening observation, not a rule of permanent neutrality or a fixed alignment for every scenario. No exact opening date or Persian intervention mechanic is settled here. Staff-managed logistics with clear qualitative advice is endorsed, with supply chiefly foregrounded under operational stress. This concerns player attention rather than suspending supply constraints outside crises. Supplying forces and transporting troops should retain their distinct constraints; no additional detailed logistics subsystem is agreed.
 
 ### Counterexamples and unresolved tensions
 
