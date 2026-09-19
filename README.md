@@ -1,10 +1,69 @@
-# Fantasy wargame comparative research
+# Wargame: command in ancient Greece
 
-This workspace is a pre-design evidence base for a possible browser-based fantasy wargame. It is deliberately not yet a game-design specification.
+An evolving browser wargame about commanding land formations and naval squadrons
+through intent, uncertain intelligence and delegated support. The first large
+scenario will place the player in Greek coalition command during the invasion of
+480 BC. The long-term aim is an open-source community wargame; publication and
+licensing decisions remain separate from the current prototype work.
 
-**Current phase:** independent evidence gathering is complete across thirteen cases. The next phase is the cross-game fireside discussion; comparative audit and game-design conclusions remain deferred until after that discussion.
+**Current phase:** the first six-turn command exercise is playable locally.
+The initial fireside decisions through Q45, comparative synthesis and implementation
+brief guide this small prototype, not a complete historical scenario. Its first
+engineering checks pass; human playability and balance remain unvalidated.
 
-The working sequence is:
+## Start here
+
+- [First-playable brief](docs/first-playable.md): scope, provisional defaults,
+  deferred systems and acceptance questions.
+- [Comparative synthesis](docs/comparative-synthesis.md): findings across all
+  thirteen cases, counterexamples and decisions superseded by the Greece setting.
+- [First playtest](docs/playtest-001.md): verification, representative map, three
+  reproducible opening policies and the next focused questions for Fable.
+- [Handover](HANDOVER.md): implementation boundaries and the next work tranche.
+- [Fireside discussion](fireside-discussion.md): Barry's recollections and the
+  decision record; dated entries retain their original status for provenance.
+- [Research log](research-log.md) and [parking lot](parking-lot.md): research history
+  and possibilities, not additional implementation requirements.
+
+The first exercise uses a deliberately schematic central-Greece area graph,
+synthetic forces and six turns. It tests simultaneous orders, retreats, land–sea
+support, qualitative advice and a sparse allied commitment. It is not a historical
+reconstruction or a balance claim about the eventual 10–15-turn scenario.
+
+## Local development
+
+The prototype uses TypeScript with a Vite-served browser interface. From this
+directory:
+
+```sh
+npm install
+npm run dev
+npm test
+npm run build
+npx playwright test
+npm run exercise
+```
+
+The development command serves the local game; the remaining commands run the
+simulation/save tests, production build, browser checks and three diagnostic play
+traces respectively. Playwright
+may need its browser installed with `npx playwright install chromium` first.
+On 19 September 2026, 21 simulation/save tests, five Chromium browser tests and
+the production build passed; see the playtest record for the limits of that evidence.
+No live model API or credentials are required for the local heuristic opponent.
+
+The game saves on this browser after an order or commitment changes. Use **Session →
+Export save** for a portable backup or **Export play record** for review. Invalid
+imports leave the current game intact. **New exercise** asks before replacing it.
+This local prototype does not promise save compatibility across future rule changes.
+
+## Research history
+
+The project began as comparative research for a possible fantasy wargame. Its
+original evidence-gathering sequence is preserved below. The later fireside
+decisions and current brief supersede the former pre-design phase restrictions.
+
+The research sequence was:
 
 1. Select a game Barry has played.
 2. Research the game independently: history, rules, play experience, praise, criticism, and evidence of sustained engagement.
@@ -22,10 +81,12 @@ The working sequence is:
 - Each dossier should distinguish an appealing feature from evidence that it actually supported repeated play.
 - Negative and short-lived cases are first-class evidence. Record redeeming features as well as the frictions that outweighed them.
 - Barry's evaluations are deliberately withheld during dossier production to reduce anchoring and hindsight contamination.
-- Ideas for the future game go into `parking-lot.md`; they are not decisions.
-- No cross-game synthesis or design prescription is authorized during individual case studies.
+- Ideas in `parking-lot.md` are not decisions unless subsequently accepted in the discussion or brief.
+- Individual case studies were kept independent of cross-game design prescriptions;
+  the now-authorised synthesis is separate rather than retrofitted into them.
 
-The deferred discussion protocol is in [`fireside-discussion.md`](fireside-discussion.md).
+The original discussion protocol and completed initial decisions are in
+[`fireside-discussion.md`](fireside-discussion.md).
 
 ## Case studies
 
