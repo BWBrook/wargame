@@ -10,6 +10,9 @@ licensing decisions remain separate from the current prototype work.
 The initial fireside decisions through Q45, comparative synthesis and implementation
 brief guide this small prototype, not a complete historical scenario. Its first
 engineering checks pass; human playability and balance remain unvalidated.
+Prototype 0.2 adds clearer onboarding, stable order controls, force/area overviews,
+hold-at-all-costs orders and the recall/report repairs. Campaign scoring remains
+under review; meeting the displayed attrition target is not proof of victory.
 
 ## Start here
 
@@ -19,6 +22,8 @@ engineering checks pass; human playability and balance remain unvalidated.
   thirteen cases, counterexamples and decisions superseded by the Greece setting.
 - [First playtest](docs/playtest-001.md): verification, representative map, three
   reproducible opening policies and the next focused questions for Fable.
+- [Repair and experiment record](docs/playtest-002.md): current changes, 7,200
+  paired-policy games, rejected candidate changes and the next review question.
 - [Handover](HANDOVER.md): implementation boundaries and the next work tranche.
 - [Fireside discussion](fireside-discussion.md): Barry's recollections and the
   decision record; dated entries retain their original status for provenance.
@@ -42,20 +47,22 @@ npm test
 npm run build
 npx playwright test
 npm run exercise
+npm run experiment
 ```
 
 The development command serves the local game; the remaining commands run the
-simulation/save tests, production build, browser checks and three diagnostic play
-traces respectively. Playwright
+simulation/save tests, production build, browser checks, three diagnostic play
+traces and the controlled experiment respectively. Playwright
 may need its browser installed with `npx playwright install chromium` first.
-On 19 September 2026, 21 simulation/save tests, five Chromium browser tests and
-the production build passed; see the playtest record for the limits of that evidence.
+See the current playtest record for verification and the limits of that evidence.
 No live model API or credentials are required for the local heuristic opponent.
 
 The game saves on this browser after an order or commitment changes. Use **Session →
 Export save** for a portable backup or **Export play record** for review. Invalid
 imports leave the current game intact. **New exercise** asks before replacing it.
 This local prototype does not promise save compatibility across future rule changes.
+Version-1 saves cannot resume under the repaired version-2 rules. They are kept for
+download; start a new exercise explicitly after exporting anything you want to retain.
 
 ## Research history
 

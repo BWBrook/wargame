@@ -6,6 +6,7 @@ import { AREAS, AREA_BY_ID } from '../src/game/scenario.ts';
 import type { GameState, Order } from '../src/game/types.ts';
 
 const move = (unitId: string, target: string): Order => ({ unitId, kind: 'move', target, intent: 'balanced' });
+const stand = (unitId: string): Order => ({ unitId, kind: 'stand', target: null, intent: 'balanced' });
 const own = (state: GameState, id: string) => state.units.find(unit => unit.id === id)!;
 function checkState(state: GameState) {
   assert.deepEqual(JSON.parse(JSON.stringify(state)), state);
@@ -168,6 +169,105 @@ test('commitment freezes; forward failure recalls survivors without resurrecting
   assert.ok(!resolveTurn(forward, [], [], 'forward').units.some(unit => unit.id === 'corinthians'));
 });
 
+test('council recall preserves a unit already at a full home, but rejects full or unsafe incoming recall', () => {
+  const state = createGame(); state.turn = 3; state.commitment = 'forward';
+  state.control.megara = 'persian';
+  for (const unit of state.units.filter(unit => unit.side === 'greek' && unit.domain === 'land')) unit.area = 'corinth';
+  const atHome = resolveTurn(state, [], [], 'forward');
+  assert.equal(atHome.commitment, 'broken');
+  assert.equal(own(atHome, 'corinthians').area, 'corinth');
+  assert.equal(atHome.units.filter(unit => unit.area === 'corinth').length, 3);
+  checkState(atHome);
+  own(state, 'corinthians').area = 'attica';
+  state.units.push({ ...own(state, 'athenians'), id: 'home-guard', name: 'Home guard' });
+  const incomingFull = resolveTurn(state, [], [], 'forward');
+  assert.ok(!incomingFull.units.some(unit => unit.id === 'corinthians'));
+  assert.equal(incomingFull.units.filter(unit => unit.area === 'corinth').length, 3);
+  checkState(incomingFull);
+  state.units = state.units.filter(unit => !['home-guard', 'athenians', 'leonidas'].includes(unit.id));
+  state.control.corinth = 'persian';
+  own(state, 'persian-main').area = 'corinth';
+  const unsafe = resolveTurn(state, [], [], 'forward');
+  assert.ok(!unsafe.units.some(unit => unit.id === 'corinthians'));
+  assert.equal(unsafe.control.corinth, 'persian');
+  checkState(unsafe);
+});
+
+test('hold at all costs requires null target and balanced intent; advice states its consequence', () => {
+  const view = observe(createGame(), 'greek');
+  assert.deepEqual(validateOrders(view, [stand('leonidas')], 'home'), []);
+  assert.ok(validateOrders(view, [{ ...stand('leonidas'), target: 'boeotia' }], 'home').length);
+  for (const intent of ['press', 'preserve'] as const) assert.ok(validateOrders(view, [{ ...stand('leonidas'), intent }], 'home').length);
+  assert.ok(advise(view, [stand('leonidas')]).reasons.some(reason => reason.includes('overrun rather than retreat') && reason.includes('no combat bonus')));
+});
+
+test('hold at all costs overrides a safe retreat and eliminates a defeated contingent', () => {
+  const state = createGame();
+  const enemy = [move('persian-main', 'thermopylae'), move('persian-guard', 'thermopylae')];
+  const ordinary = resolveTurn(state, [], enemy, 'home');
+  assert.equal(own(ordinary, 'leonidas').area, 'boeotia');
+  const committed = resolveTurn(state, [stand('leonidas')], enemy, 'home');
+  assert.ok(!committed.units.some(unit => unit.id === 'leonidas'));
+  const report = observe(committed, 'greek').dispatches.filter(item => item.kind === 'battle').map(item => item.text).join('\n');
+  assert.match(report, /Spartan contingent held at all costs as ordered and was overrun/);
+  assert.match(report, /No reliable enemy casualty estimate/);
+  assert.ok(!report.includes('Spartan contingent falls back'));
+  const record = committed.history[0];
+  assert.deepEqual(resolveTurn(createGame(), record.greek, record.persian, record.choice), committed);
+  checkState(committed);
+});
+
+test('winning hold at all costs receives no power or casualty bonus, and is not sticky next turn', () => {
+  const state = createGame();
+  own(state, 'persian-main').strength = 40;
+  const enemy = [move('persian-main', 'thermopylae')];
+  const ordinary = resolveTurn(state, [], enemy, 'home');
+  const committed = resolveTurn(state, [stand('leonidas')], enemy, 'home');
+  assert.equal(own(committed, 'leonidas').area, 'thermopylae');
+  assert.deepEqual(committed.units, ordinary.units);
+  assert.equal(committed.rng, ordinary.rng);
+  const next = resolveTurn(committed, [], [], 'home');
+  assert.equal(next.history[1].greek.find(order => order.unitId === 'leonidas')!.kind, 'hold');
+});
+
+test('hold at all costs applies equally to defeated squadrons', () => {
+  const state = createGame();
+  const enemy = [move('phoenician-fleet', 'artemisium'), move('ionian-fleet', 'artemisium')];
+  assert.equal(own(resolveTurn(state, [], enemy, 'home'), 'athenian-fleet').area, 'euripus');
+  const committed = resolveTurn(state, [stand('athenian-fleet')], enemy, 'home');
+  assert.ok(!committed.units.some(unit => unit.id === 'athenian-fleet'));
+  assert.ok(observe(committed, 'greek').dispatches.some(item => item.text.includes('Athenian squadron held at all costs')));
+  checkState(committed);
+});
+
+test('battle aftermath gives bands and uncertainty without enemy retreat destinations or exact losses', () => {
+  const state = createGame(); own(state, 'persian-main').strength = 40;
+  const won = resolveTurn(state, [], [move('persian-main', 'thermopylae')], 'home');
+  const winningReports = observe(won, 'greek').dispatches.filter(item => item.kind === 'battle').map(item => item.text).join('\n');
+  assert.match(winningReports, /Observed enemy losses were substantial/);
+  assert.match(winningReports, /withdrawal destination and remaining strength are unconfirmed/);
+  assert.ok(!winningReports.includes('Main contingent'));
+  assert.ok(!winningReports.includes('falls back to Thessaly'));
+  assert.ok(!winningReports.includes('Experience and bounded'));
+  assert.ok(!/enemy (?:force )?lost \d/i.test(winningReports));
+  const lost = resolveTurn(createGame(), [], [move('persian-main', 'thermopylae'), move('persian-guard', 'thermopylae')], 'home');
+  const losingReports = observe(lost, 'greek').dispatches.filter(item => item.kind === 'battle').map(item => item.text).join('\n');
+  assert.match(losingReports, /Withdrawal reports suggest light enemy losses, but the estimate is uncertain/);
+  assert.match(losingReports, /subsequent dispositions are unconfirmed/);
+  const persianView = observe(lost, 'persian');
+  assert.ok(!persianView.dispatches.some(item => item.text.includes('Spartan contingent falls back')));
+  const enemyStand = createGame();
+  own(enemyStand, 'leonidas').area = 'boeotia';
+  own(enemyStand, 'persian-main').area = 'thermopylae';
+  own(enemyStand, 'persian-main').strength = 15;
+  const overrun = resolveTurn(enemyStand, [move('leonidas', 'thermopylae')], [stand('persian-main')], 'home');
+  const overrunReports = observe(overrun, 'greek').dispatches.filter(item => item.kind === 'battle').map(item => item.text).join('\n');
+  assert.match(overrunReports, /Observed enemy losses were heavy/);
+  assert.match(overrunReports, /Organized enemy resistance at the position collapsed/);
+  assert.ok(!overrunReports.includes('Main contingent'));
+  assert.ok(!overrunReports.includes('held at all costs as ordered'));
+});
+
 test('contact memory refreshes observed clear areas, retaining stale distant sightings', () => {
   const state = createGame();
   state.contacts.greek.push({ area: 'saronic', band: 'strong', seenTurn: 0 }, { area: 'pagasae', band: 'light', seenTurn: 0 });
@@ -186,6 +286,8 @@ test('quiet survival is stalemate; objective damage plus supplied forces can win
   assert.match(navalOnly.outcome!.reason, /army attrition: less than 25%; Persian fleet attrition: at least 25%/);
   for (const unit of state.units.filter(unit => unit.side === 'persian')) unit.strength = Math.round(unit.strength * .7);
   assert.equal(resolveTurn(state, [], [], 'home').outcome!.result, 'victory');
+  assert.match(resolveTurn(state, [], [], 'home').outcome!.title, /campaign unresolved/);
+  assert.match(resolveTurn(state, [], [], 'home').outcome!.reason, /does not establish that the invasion was checked/);
   state.commitment = 'broken';
   assert.equal(resolveTurn(state, [], [], 'forward').outcome!.result, 'stalemate');
 });

@@ -22,7 +22,7 @@ function refreshContacts(state: GameState): void {
 export function createGame(seed = SCENARIO.seed): GameState {
   const initialSeed = Number.isFinite(seed) ? seed >>> 0 : SCENARIO.seed;
   const state: GameState = {
-    version: 1, initialSeed, rng: initialSeed, turn: 1, maxTurns: SCENARIO.turns,
+    version: 2, initialSeed, rng: initialSeed, turn: 1, maxTurns: SCENARIO.turns,
     units: copy(INITIAL_UNITS), control: Object.fromEntries(AREAS.map(area => [area.id, ['thessaly', 'pagasae'].includes(area.id) ? 'persian' : 'greek'])),
     contacts: { greek: [], persian: [] }, dispatches: [], commitment: 'unsettled', history: [], outcome: null,
   };
@@ -49,9 +49,10 @@ export function validateOrders(view: Observation, orders: Order[], choice: Commi
     if (seen.has(unit.id)) errors.push(`Duplicate order for ${unit.name}.`);
     seen.add(unit.id);
     if (!['press', 'balanced', 'preserve'].includes(order.intent)) errors.push(`Invalid intent for ${unit.name}.`);
-    if (!['hold', 'move', 'reserve'].includes(order.kind)) { errors.push(`Invalid order for ${unit.name}.`); continue; }
-    if (order.kind === 'hold') {
-      if (order.target !== null) errors.push(`A hold order for ${unit.name} must have no target.`);
+    if (!['hold', 'stand', 'move', 'reserve'].includes(order.kind)) { errors.push(`Invalid order for ${unit.name}.`); continue; }
+    if (order.kind === 'hold' || order.kind === 'stand') {
+      if (order.target !== null) errors.push(`A ${order.kind} order for ${unit.name} must have no target.`);
+      if (order.kind === 'stand' && order.intent !== 'balanced') errors.push(`Hold at all costs for ${unit.name} requires balanced intent; it forbids retreat, not grants extra combat power.`);
       continue;
     }
     const target = order.target ? AREA_BY_ID[order.target] : null;
@@ -78,6 +79,7 @@ export function advise(view: Observation, orders: Order[]): Advice {
   const reasons: string[] = [];
   for (const unit of view.units) {
     const order = orders.find(candidate => candidate.unitId === unit.id);
+    if (order?.kind === 'stand') reasons.push(`${unit.name} must hold at all costs: if defeated, it will be overrun rather than retreat. This grants no combat bonus.`);
     if (!unit.supplied) reasons.push(`${unit.name} is beyond reliable support; cohesion will deteriorate until a controlled route is restored.`);
     if (unit.cohesion < 50) reasons.push(`${unit.name} has low cohesion; a supplied pause can help it recover.`);
     if (order?.target) {
@@ -144,7 +146,12 @@ export function resolveTurn(input: GameState, greekOrders: Order[], persianOrder
       const loss = (won ? .10 : .24) * (intent === 'press' ? 1.25 : intent === 'preserve' ? .70 : 1);
       unit.strength = Math.max(0, Math.round(unit.strength * (1 - loss)));
       unit.cohesion = clamp(unit.cohesion - (won ? 10 : 25));
-      if (!won) retreating.add(unit.id);
+      if (!won) {
+        if (orders.get(unit.id)!.kind === 'stand') {
+          unit.strength = 0;
+          dispatch(unit.side, 'battle', `${unit.name} held at all costs as ordered and was overrun at ${area.name}; no retreat was attempted.`);
+        } else retreating.add(unit.id);
+      }
     }
     for (const side of ['greek', 'persian'] as const) {
       const own = present.filter(unit => unit.side === side);
@@ -152,8 +159,16 @@ export function resolveTurn(input: GameState, greekOrders: Order[], persianOrder
       const ownStrength = own.reduce((sum, unit) => sum + beforeBattle.get(unit.id)!.strength, 0);
       const enemyStrength = present.filter(unit => unit.side !== side).reduce((sum, unit) => sum + beforeBattle.get(unit.id)!.strength, 0);
       const loss = own.reduce((sum, unit) => sum + beforeBattle.get(unit.id)!.strength - unit.strength, 0);
+      const enemy = present.filter(unit => unit.side !== side);
+      const enemyLossFraction = enemy.reduce((sum, unit) => sum + beforeBattle.get(unit.id)!.strength - unit.strength, 0) / enemyStrength;
+      const enemyLossBand = enemyLossFraction < .15 ? 'light' : enemyLossFraction < .35 ? 'substantial' : 'heavy';
+      const enemyAftermath = side === winner
+        ? ` Observed enemy losses were ${enemyLossBand}. ${enemy.some(unit => unit.strength >= 10) ? 'The enemy broke from the position; its withdrawal destination and remaining strength are unconfirmed.' : 'Organized enemy resistance at the position collapsed.'}`
+        : own.some(unit => unit.strength >= 10)
+          ? ` Withdrawal reports suggest ${enemyLossBand} enemy losses, but the estimate is uncertain; the enemy held the position and its subsequent dispositions are unconfirmed.`
+          : ' No reliable enemy casualty estimate reached command after your force was lost; subsequent enemy dispositions are unconfirmed.';
       const concentration = enemyStrength > ownStrength * 1.3 ? ' The enemy brought a larger concentration.' : ownStrength > enemyStrength * 1.3 ? ' Your force held a concentration advantage.' : ' The opposing concentrations were broadly comparable.';
-      dispatch(side, 'battle', `${area.name}: ${side === winner ? 'your force held the field' : 'your force was forced to retreat'}. Your force lost ${loss} strength points.${concentration}${own.some(unit => beforeBattle.get(unit.id)!.cohesion < 50) ? ' Low cohesion weakened your force.' : ''}${prepared ? ' Your prepared position helped the defence.' : ''}${own.some(unit => orders.get(unit.id)!.intent === 'press') ? ' Pressing increased commitment and casualties.' : ''}${own.some(unit => orders.get(unit.id)!.intent === 'preserve') ? ' Preservation reduced casualties at the cost of commitment.' : ''}${own.some(unit => crossings.has(unit.id)) ? ' Opposing movements met on the route; moving forces received no prepared defence bonus.' : ''} Experience and bounded battlefield uncertainty also affect resolution.`);
+      dispatch(side, 'battle', `${area.name}: ${side === winner ? 'your force held the field' : 'your force was defeated'}. Your force lost ${loss} strength points.${concentration}${own.some(unit => beforeBattle.get(unit.id)!.cohesion < 50) ? ' Low cohesion weakened your force.' : ''}${prepared ? ' Your prepared position helped the defence.' : ''}${own.some(unit => orders.get(unit.id)!.intent === 'press') ? ' Pressing increased commitment and casualties.' : ''}${own.some(unit => orders.get(unit.id)!.intent === 'preserve') ? ' Preservation reduced casualties at the cost of commitment.' : ''}${own.some(unit => crossings.has(unit.id)) ? ' Opposing movements met on the route; moving forces received no prepared defence bonus.' : ''}${enemyAftermath}`);
     }
   }
   const alive = (unit: Unit) => unit.strength >= 10;
@@ -188,7 +203,7 @@ export function resolveTurn(input: GameState, greekOrders: Order[], persianOrder
       const corinthians = state.units.find(unit => unit.id === 'corinthians');
       if (corinthians) {
         // Explicit council recall exception, not ordinary retreat or transport.
-        if (state.control.corinth === 'greek' && state.units.filter(unit => unit.area === 'corinth').length < AREA_BY_ID.corinth.capacity) corinthians.area = 'corinth';
+        if (state.control.corinth === 'greek' && state.units.filter(unit => unit.area === 'corinth' && unit.id !== corinthians.id).length < AREA_BY_ID.corinth.capacity) corinthians.area = 'corinth';
         else corinthians.strength = 0;
       }
       dispatch('both', 'council', 'The forward-service promise failed: Megara was not held after turn 3. Surviving Corinthians are recalled directly to Corinth as an explicit council exception; if their home is unavailable, their contingent disbands. Coalition cohesion is broken.');
@@ -219,7 +234,7 @@ export function resolveTurn(input: GameState, greekOrders: Order[], persianOrder
     const secure = (['land', 'sea'] as const).every(domain => state.units.some(unit => unit.side === 'greek' && unit.domain === domain && unit.supplied));
     const victory = checked && secure && state.commitment !== 'broken';
     const attrition = ` Persian army attrition: ${checkedDomains[0] ? 'at least' : 'less than'} 25%; Persian fleet attrition: ${checkedDomains[1] ? 'at least' : 'less than'} 25%.`;
-    state.outcome = { result: victory ? 'victory' : 'stalemate', title: victory ? 'The invasion is checked' : 'An unresolved campaign', reason: (victory ? 'The coalition retained a supplied field army and fleet, kept its commitment, and reduced both the invading army and fleet by at least one quarter.' : `Survival alone is not victory.${!checked ? ' Both the invading army and fleet must lose at least a quarter of their respective initial strength.' : ''}${!secure ? ' The coalition lacks a supplied field army or supplied fleet.' : ''}${state.commitment === 'broken' ? ' The coalition commitment is broken.' : ''}`) + attrition };
+    state.outcome = { result: victory ? 'victory' : 'stalemate', title: victory ? 'Attrition target met — campaign unresolved' : 'An unresolved campaign', reason: 'This provisional score does not establish that the invasion was checked. ' + (victory ? 'The coalition retained a supplied field army and fleet, kept its commitment, and reduced both the invading army and fleet by at least one quarter.' : `Survival alone does not meet the exercise targets.${!checked ? ' Both the invading army and fleet must lose at least a quarter of their respective initial strength.' : ''}${!secure ? ' The coalition lacks a supplied field army or supplied fleet.' : ''}${state.commitment === 'broken' ? ' The coalition commitment is broken.' : ''}`) + attrition };
   }
   if (state.outcome) dispatch('both', 'outcome', `${state.outcome.title}. ${state.outcome.reason}`);
   state.turn++;

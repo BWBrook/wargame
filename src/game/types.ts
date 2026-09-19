@@ -31,7 +31,7 @@ export interface Unit {
 
 export interface Order {
   unitId: string;
-  kind: 'hold' | 'move' | 'reserve';
+  kind: 'hold' | 'stand' | 'move' | 'reserve';
   target: string | null;
   intent: Intent;
 }
@@ -63,7 +63,7 @@ export interface TurnRecord {
 }
 
 export interface GameState {
-  version: 1;
+  version: 2;
   initialSeed: number;
   rng: number;
   turn: number;
@@ -97,7 +97,7 @@ export interface Advice {
 }
 
 export interface SaveGame {
-  version: 1;
+  version: 2;
   state: GameState;
   orders: Order[];
   choice: CommitmentChoice;

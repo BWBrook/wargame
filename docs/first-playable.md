@@ -3,6 +3,12 @@
 Design brief, 19 September 2026. This is an implementation brief, not a historical
 scenario specification or a claim that the acceptance checks below have passed.
 
+20 September update: see [tranche 002](playtest-002.md) for the implemented repairs,
+onboarding, persistent controls, overviews, hold-at-all-costs instruction and paired
+experiments. The attrition score below remains a diagnostic control; its inability
+to establish that the invasion was checked is now stated in the interface. The
+experimental positional scorer and preservation doctrine are not live game rules.
+
 ## Purpose and authority
 
 Test whether commanding a few land formations and naval squadrons under uncertain,

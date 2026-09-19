@@ -4,11 +4,25 @@ import { createGame, observe, validateOrders } from '../src/game/engine.ts';
 import { commitSave, deserializeSave, serializeSave } from '../src/game/save.ts';
 import type { SaveGame } from '../src/game/types.ts';
 
-const fresh = (): SaveGame => ({ version: 1, state: createGame(), orders: [], choice: 'home' });
+const fresh = (): SaveGame => ({ version: 2, state: createGame(), orders: [], choice: 'home' });
 
 test('seed zero is a supported reproducible save', () => {
   const save = { ...fresh(), state: createGame(0) };
   assert.deepEqual(deserializeSave(serializeSave(save)), save);
+});
+
+test('prior rules saves are explicitly rejected without rewriting the original', () => {
+  const previous = JSON.stringify({ ...fresh(), version: 1 });
+  assert.throws(() => deserializeSave(previous), /earlier prototype rules/);
+  assert.equal(JSON.parse(previous).version, 1);
+});
+
+test('hold-at-all-costs drafts roundtrip and resolve reproducibly', () => {
+  const save = fresh();
+  save.orders = [{ unitId: 'leonidas', kind: 'stand', target: null, intent: 'balanced' }];
+  assert.deepEqual(deserializeSave(serializeSave(save)), save);
+  const next = commitSave(save);
+  assert.deepEqual(deserializeSave(serializeSave(next)), next);
 });
 
 test('save replays complete exercise and restores editable drafts without world mutation', () => {

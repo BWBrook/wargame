@@ -2,7 +2,7 @@ import type { Area, Unit } from './types.ts';
 
 // Authored schematic exercise, not a historical movement graph or order of battle.
 export const SCENARIO = {
-  id: 'the-narrow-sea-v1',
+  id: 'the-narrow-sea-v2',
   title: 'The Narrow Sea',
   subtitle: 'A Greek coalition command exercise · 480 BC',
   turns: 6,

@@ -5,7 +5,7 @@ import { commitSave, deserializeSave, SAVE_KEY, serializeSave } from './game/sav
 import type { Area, Intent, Observation, Order, SaveGame, Unit } from './game/types.ts';
 
 const root = document.querySelector<HTMLDivElement>('#app')!;
-let save: SaveGame = { version: 1, state: createGame(), orders: [], choice: 'home' };
+let save: SaveGame = { version: 2, state: createGame(), orders: [], choice: 'home' };
 let selected = 'leonidas';
 let notice = '';
 let saveStatus = 'Local session';
@@ -14,7 +14,15 @@ let showBrief = false;
 let confirmCommit = false;
 let confirmRestart = false;
 let showSession = false;
+let showOverview = false;
+const VIEW_KEY = 'wargame:narrow-sea:view';
+const openDetails = new Set<string>();
 try {
+  try {
+    const preferences = JSON.parse(localStorage.getItem(VIEW_KEY) ?? '{}');
+    if (typeof preferences.selected === 'string') selected = preferences.selected;
+    if (Array.isArray(preferences.openDetails)) preferences.openDetails.filter((id: unknown) => typeof id === 'string').forEach((id: string) => openDetails.add(id));
+  } catch { /* View preferences are disposable; never affect the game save. */ }
   const stored = localStorage.getItem(SAVE_KEY);
   if (stored) {
     try { save = deserializeSave(stored); saveStatus = 'Resumed locally'; }
@@ -28,6 +36,44 @@ function esc(value: unknown): string {
 function condition(unit: Unit): string { return unit.cohesion >= 75 ? 'Steady' : unit.cohesion >= 45 ? 'Shaken' : 'Disordered'; }
 function strength(unit: Unit): string { return unit.strength >= 65 ? 'Effective' : unit.strength >= 35 ? 'Reduced' : 'Depleted'; }
 function draft(unit: Unit): Order { return save.orders.find(order => order.unitId === unit.id) ?? { unitId: unit.id, kind: 'hold', target: null, intent: 'balanced' }; }
+function orderLabel(order: Order): string {
+  if (order.kind === 'stand') return 'Hold at all costs';
+  if (order.kind === 'hold') return 'Hold & recover';
+  return `${order.kind === 'reserve' ? 'Reserve for' : 'Move to'} ${AREA_BY_ID[order.target!]?.name ?? '—'} · ${order.intent === 'balanced' ? 'measured' : order.intent}`;
+}
+function persistView(): void {
+  try { localStorage.setItem(VIEW_KEY, JSON.stringify({ selected, openDetails: [...openDetails] })); } catch { /* Game export remains available without local storage. */ }
+}
+
+/** Keep live controls connected: replacing a select closes its native popup and
+ * interrupts repeated arrow keys even if focus is restored afterwards. */
+function reconcile(parent: Element, incoming: Element): void {
+  const keyed = (node: Node): string => node instanceof Element ? node.id || node.getAttribute('data-unit') || node.getAttribute('data-area') || (node instanceof HTMLInputElement ? `${node.name}:${node.value}` : '') : '';
+  const compatible = (left: Node, right: Node) => left.nodeType === right.nodeType && (!(left instanceof Element) || right instanceof Element && left.tagName === right.tagName && keyed(left) === keyed(right));
+  let cursor: ChildNode | null = parent.firstChild;
+  for (const next of [...incoming.childNodes]) {
+    let current = cursor;
+    if (!current || !compatible(current, next)) {
+      current = keyed(next) ? [...parent.childNodes].find(node => compatible(node, next)) ?? null : null;
+      if (current) parent.insertBefore(current, cursor);
+      else { parent.insertBefore(next.cloneNode(true), cursor); continue; }
+    }
+    if (current instanceof Element && next instanceof Element) {
+      for (const attribute of [...current.attributes]) if (!next.hasAttribute(attribute.name) && !(current instanceof HTMLDetailsElement && attribute.name === 'open') && !(current instanceof HTMLDialogElement && attribute.name === 'open')) current.removeAttribute(attribute.name);
+      for (const attribute of [...next.attributes]) if (current.getAttribute(attribute.name) !== attribute.value) current.setAttribute(attribute.name, attribute.value);
+      if (current instanceof HTMLSelectElement && next instanceof HTMLSelectElement) {
+        const options = (select: HTMLSelectElement) => [...select.options].map(option => `${option.value}\0${option.textContent}`).join('\n');
+        if (options(current) !== options(next)) current.replaceChildren(...[...next.childNodes].map(node => node.cloneNode(true)));
+        if (current.value !== next.value) current.value = next.value;
+      } else {
+        reconcile(current, next);
+        if (current instanceof HTMLInputElement && next instanceof HTMLInputElement) current.checked = next.checked;
+      }
+    } else if (current.nodeValue !== next.nodeValue) current.nodeValue = next.nodeValue;
+    cursor = current.nextSibling;
+  }
+  while (cursor) { const next = cursor.nextSibling; cursor.remove(); cursor = next; }
+}
 
 function persist(): void {
   if (corruptSave) { saveStatus = 'Original save preserved'; return; }
@@ -43,6 +89,7 @@ function download(filename: string, body: string, mime = 'application/json'): vo
 }
 
 function stage(order: Order): void {
+  if (save.state.outcome || corruptSave) return;
   save.orders = [...save.orders.filter(item => item.unitId !== order.unitId), order];
   notice = ''; persist(); render();
 }
@@ -108,19 +155,30 @@ function inspector(view: Observation): string {
       <option value="hold" ${order.kind === 'hold' ? 'selected' : ''}>Hold & recover</option>
       <option value="move" ${order.kind === 'move' ? 'selected' : ''}>Move / engage</option>
       <option value="reserve" ${order.kind === 'reserve' ? 'selected' : ''}>Reserve for one approach</option>
+      <option value="stand" ${order.kind === 'stand' ? 'selected' : ''}>Hold at all costs</option>
     </select>
-    ${order.kind !== 'hold' ? `<label for="destination">${order.kind === 'reserve' ? 'Respond if attacked here' : 'Destination'}</label><select id="destination" ${view.outcome ? 'disabled' : ''}>${area.neighbors.map(id => `<option value="${id}" ${order.target === id ? 'selected' : ''}>${esc(AREA_BY_ID[id].name)}</option>`).join('')}</select>` : ''}
-    <fieldset class="intent" ${view.outcome ? 'disabled' : ''}><legend>Combat intent</legend>
+    ${order.kind === 'move' || order.kind === 'reserve' ? `<label for="destination">${order.kind === 'reserve' ? 'Respond if attacked here' : 'Destination'}</label><select id="destination" ${view.outcome ? 'disabled' : ''}>${area.neighbors.map(id => `<option value="${id}" ${order.target === id ? 'selected' : ''}>${esc(AREA_BY_ID[id].name)}</option>`).join('')}</select>` : ''}
+    <fieldset class="intent" ${view.outcome || order.kind === 'stand' ? 'disabled' : ''}><legend>Combat intent</legend>
       ${(['preserve', 'balanced', 'press'] as Intent[]).map(value => `<label><input type="radio" name="intent" value="${value}" ${order.intent === value ? 'checked' : ''}/><span>${value === 'preserve' ? 'Preserve' : value === 'press' ? 'Press' : 'Measured'}</span></label>`).join('')}
     </fieldset>
-    <p class="small">${order.intent === 'press' ? 'Commit aggressively; accept greater losses.' : order.intent === 'preserve' ? 'Protect the formation; concede ground more readily.' : 'Balance the chance of holding ground against losses.'}</p>
+    <p class="small ${order.kind === 'stand' ? 'stand-warning' : ''}">${order.kind === 'stand' ? 'No retreat from a lost battle this turn. If overrun, this formation is lost. This order does not guarantee victory; ordinary combat intent is disabled. Reissue next turn if still required. Council recall and capacity withdrawals remain separate rules.' : order.intent === 'press' ? 'Commit aggressively; accept greater losses.' : order.intent === 'preserve' ? 'Protect the formation; concede ground more readily.' : 'Balance the chance of holding ground against losses.'}</p>
     ${order.kind === 'reserve' ? '<p class="small">One reserve order per side. Only an enemy arrival at this named area triggers the response. The commander acts after orders are locked.</p>' : ''}
     <button id="clear-order" class="text-button" ${view.outcome ? 'disabled' : ''}>Reset this order</button>
     <div class="area-description"><strong>${esc(area.terrain)} · capacity ${area.capacity}</strong><p>${esc(area.description)}</p></div>`;
 }
 
 function brief(): string {
-  return `<dialog id="brief-dialog" open aria-labelledby="brief-title"><div class="dialog-content"><div class="eyebrow">YOUR FIRST COMMAND</div><h2 id="brief-title">The Narrow Sea</h2><p>You command five Greek formations. An invading army can use two land approaches, while its fleet pushes south. You have six turns to check that advance and retain a viable coalition.</p><ol><li>Select a blue formation on the map or in the orders panel.</li><li>Choose an adjacent destination, or hold. Pick a combat intent.</li><li>Read your staff assessment and review all draft orders.</li><li>Commit once. Both sides move; the enemy does not see your drafts.</li></ol><p>Choose the Corinthians’ service terms before the first commitment. Reports may be old or incomplete. Territory colours are public occupation news; enemy flags are sightings, not exact strength.</p><p class="small">A short, schematic command exercise. Six turns are not six historical weeks. Force values, routes and victory thresholds are test fixtures. No full diplomacy, siege or troop transport yet.</p><button class="primary" id="close-brief">Enter headquarters</button></div></dialog>`;
+  return `<dialog id="brief-dialog" aria-labelledby="brief-title"><div class="dialog-content"><div class="eyebrow">YOUR FIRST COMMAND · GREEK COALITION</div><h2 id="brief-title">The Narrow Sea</h2><p>You command the <strong>Greek defenders</strong>: three land formations and two naval squadrons. The computer commands the <strong>Persian invasion from the north</strong>. Its army can approach through Thermopylae or Phocis; its fleet advances from Pagasae through Artemisium and the Euboean waters.</p><p>Your job is to coordinate the land defence and protect naval support while keeping the coalition viable. You choose where to fight, withdraw or concentrate. No historical battle or outcome is scripted.</p><h3>Read the map as a commander</h3><p>Blue counters are your formations; red flags are approximate enemy sightings. Each named area is an operational region, not a battlefield square. A counter represents a formation or squadron—not 300 individual men or one ship. Distances, routes and force sizes are deliberately schematic.</p><h3>One turn, four steps</h3><ol><li>Select a blue counter or choose a formation in the orders panel. Overview lists every area and your forces.</li><li>Draft a hold, move or reserve response. Choose how strongly to press or preserve the force; <em>Hold at all costs</em> instead forbids retreat.</li><li>Read staff advice and review your plan. You may revise freely; undrafted formations <strong>hold & recover</strong>. Drafting does not move troops or reveal enemies.</li><li>Commit once. Both sides' orders resolve together, then read the dispatches before planning again. There is no timer.</li></ol><p>Before the first turn, choose the Corinthians’ service terms. Home service restricts them to Megara and Corinth; forward service requires holding Megara after turn 3.</p><h3>Provisional exercise objective</h3><p id="brief-objective">By turn 6, retain a supplied army and fleet, honour the coalition commitment, and inflict at least 25% losses on each of the Persian army and fleet. Losing all your land forces or all your squadrons ends the exercise early. These experimental thresholds are not a historical victory definition.</p><p class="small">Supply is managed for you, but controlled routes matter. Territory colours are public occupation news; enemy reports may be stale. Six turns are not six historical weeks. No full diplomacy, siege or troop transport yet.</p><button class="primary" id="close-brief">Enter headquarters</button></div></dialog>`;
+}
+
+function overview(view: Observation): string {
+  const report = (area: Area): string => {
+    const contact = view.contacts.find(item => item.area === area.id);
+    if (!contact) return 'Unknown · no report';
+    const age = contact.seenTurn === view.turn ? `Current · turn ${contact.seenTurn}` : `Stale · last reported turn ${contact.seenTurn}`;
+    return `${contact.band === 'clear' ? 'Clear at observation' : `${contact.band} enemy presence`} · ${age}`;
+  };
+  return `<dialog id="overview-dialog" class="overview-dialog" aria-labelledby="overview-title"><div class="dialog-content"><div class="overview-heading"><div><div class="eyebrow">COMMAND REGISTER · TURN ${Math.min(view.turn, view.maxTurns)}</div><h2 id="overview-title">Forces & areas</h2></div><button id="close-overview" autofocus>Return to map</button></div><p class="small">Your formations are listed exactly. Enemy information is limited to dated sightings; public control does not prove a force is present. Select your formation to return to its orders.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Your formations table"><table><caption>Your formations</caption><thead><tr><th scope="col">Formation</th><th scope="col">Location</th><th scope="col">Condition</th><th scope="col">Supply</th><th scope="col">Current draft</th></tr></thead><tbody>${view.units.map(unit => `<tr><th scope="row"><button class="text-button" data-overview-unit="${unit.id}">${esc(unit.name)}</button></th><td>${esc(AREA_BY_ID[unit.area].name)}</td><td>${strength(unit)} · ${condition(unit)}</td><td>${unit.supplied ? 'Supplied' : 'Strained'}</td><td>${esc(orderLabel(draft(unit)))}${save.orders.some(order => order.unitId === unit.id) ? '' : ' (default)'}</td></tr>`).join('')}</tbody></table></div><div class="table-scroll" tabindex="0" role="region" aria-label="Theatre areas table"><table><caption>Theatre areas</caption><thead><tr><th scope="col">Area</th><th scope="col">Type / capacity</th><th scope="col">Public control</th><th scope="col">Your occupants</th><th scope="col">Enemy report</th></tr></thead><tbody>${AREAS.map(area => `<tr data-overview-area="${area.id}"><th scope="row">${esc(area.name)}</th><td>${area.domain === 'land' ? 'Land' : 'Sea'} · ${area.capacity}</td><td>${view.control[area.id] === 'greek' ? 'Greek' : view.control[area.id] === 'persian' ? 'Persian' : 'Neutral'}</td><td>${view.units.filter(unit => unit.area === area.id).map(unit => esc(unit.name)).join(', ') || 'None'}</td><td>${esc(report(area))}</td></tr>`).join('')}</tbody></table></div></div></dialog>`;
 }
 
 function render(): void {
@@ -129,7 +187,8 @@ function render(): void {
   const errors = view.outcome ? [] : validateOrders(view, save.orders, save.choice);
   const advice = advise(view, save.orders);
   const recent = view.dispatches.filter(item => item.turn === Math.max(0, view.turn - 1));
-  root.innerHTML = `<header class="masthead"><div><div class="eyebrow">COALITION HEADQUARTERS · 480 BC</div><h1>The Narrow Sea</h1><p>A command exercise</p></div><div class="header-actions"><button id="help" class="ghost">Briefing</button><button id="session-toggle" class="ghost" aria-expanded="${showSession}">Session</button><div class="turn"><span>${view.outcome ? 'EXERCISE' : 'PLANNING'}</span><strong>${view.outcome ? 'Complete' : `Turn ${view.turn} / ${view.maxTurns}`}</strong></div></div></header>
+  const template = document.createElement('div');
+  template.innerHTML = `<header class="masthead"><div><div class="eyebrow">COALITION HEADQUARTERS · 480 BC</div><h1>The Narrow Sea</h1><p>A command exercise</p></div><div class="header-actions"><button id="overview" class="ghost">Overview</button><button id="help" class="ghost">Briefing</button><button id="session-toggle" class="ghost" aria-expanded="${showSession}">Session</button><div class="turn"><span>${view.outcome ? 'EXERCISE' : 'PLANNING'}</span><strong>${view.outcome ? 'Complete' : `Turn ${view.turn} / ${view.maxTurns}`}</strong></div></div></header>
     ${showSession ? `<section class="session-bar" aria-label="Session controls"><span>${esc(saveStatus)}</span><button id="export-save">Export save</button><button id="export-record">Export play record</button><label class="file-label" for="import-save">Import save<input id="import-save" type="file" accept=".json,application/json"/></label><button id="restart">New exercise</button>${corruptSave ? '<button id="recover-save">Download original save</button>' : ''}</section>` : ''}
     ${notice ? `<div class="notice" role="status">${esc(notice)}</div>` : ''}
     ${view.outcome ? `<section class="outcome ${view.outcome.result}" aria-live="polite"><div class="eyebrow">AFTER SIX TURNS, OR LOSS OF A VIABLE FORCE</div><h2>${esc(view.outcome.title)}</h2><p>${esc(view.outcome.reason)}</p><button id="restart-outcome">Try another plan</button><button id="export-record-outcome">Export play record</button></section>` : ''}
@@ -139,24 +198,66 @@ function render(): void {
     <div class="commit-panel"><div class="eyebrow">ALLIED COMMITMENT</div><h2>The Corinthian contingent</h2>
       ${view.turn === 1 && !view.outcome ? `<label for="commitment">Service terms</label><select id="commitment"><option value="home" ${save.choice === 'home' ? 'selected' : ''}>Keep the southern approaches</option><option value="forward" ${save.choice === 'forward' ? 'selected' : ''}>Request forward service</option></select><p class="small">Home service limits the contingent to Megara and Corinth. Forward service releases it for the wider theatre, provided Megara is still held after turn 3. Failure means withdrawal and a broken commitment.</p>` : `<p class="pledge-status">${({ unsettled: 'Awaiting your instruction', home: 'Home service · Megara and Corinth only', forward: 'Forward service · hold Megara through turn 3', honoured: 'Forward commitment honoured', broken: 'Commitment broken · contingent withdrawn' })[view.commitment]}</p>`}
       <details><summary>Exercise objective & support rules</summary><p class="small">At the end of turn 6, retain a supplied army and fleet, honour your commitment, and inflict at least 25% losses on each of the Persian army and fleet. These are provisional exercise thresholds, assessed at the end—not a live enemy-strength meter. Losing all land forces or all squadrons ends the exercise early.</p><p class="small">Supply follows continuously controlled routes. Corinth supplies the army; Attica is an alternative source while both Attica and the Saronic Gulf are held. The Saronic Gulf supplies your fleet. Isolated formations lose cohesion, not manpower. Unopposed supplied holds restore cohesion, not casualties.</p><p class="small">Capacity limits apply separately to each side. Opposite movements on one route meet at its northern endpoint, with no prepared-defence bonus for movers. A defeated force needs a safe adjacent retreat with space. Field control is not a siege result.</p></details>
-      <details id="orders-review"><summary>Review orders · ${save.orders.length} drafted</summary><ul>${view.units.map(unit => { const order = draft(unit); return `<li><strong>${esc(unit.name)}</strong><br/>${order.kind === 'hold' ? 'Hold' : `${order.kind === 'reserve' ? 'Reserve for' : 'Move to'} ${esc(AREA_BY_ID[order.target!]?.name ?? '—')}`} · ${order.intent === 'balanced' ? 'measured' : order.intent}</li>`; }).join('')}</ul></details>
+      <details id="orders-review"><summary>Review orders · ${save.orders.length} drafted</summary><ul>${view.units.map(unit => `<li><strong>${esc(unit.name)}</strong><br/>${esc(orderLabel(draft(unit)))}</li>`).join('')}</ul></details>
       ${errors.length ? `<div class="order-errors" role="alert"><strong>Revise these orders</strong><ul>${errors.map(error => `<li>${esc(error)}</li>`).join('')}</ul></div>` : ''}
       <button id="commit" class="primary commit" ${view.outcome || errors.length || corruptSave ? 'disabled' : ''}>${view.outcome ? 'Exercise complete' : `Commit turn ${view.turn}`} <span>→</span></button><p class="save-status" role="status">${esc(saveStatus)} · no timer</p>
     </div></section>
     <section class="dispatches" aria-labelledby="dispatch-title"><div class="eyebrow">AFTER ACTION</div><h2 id="dispatch-title">${view.turn === 1 ? 'Opening dispatch' : `Reports from turn ${Math.min(view.turn - 1, view.maxTurns)}`}</h2><div class="dispatch-list">${recent.map(item => `<article class="dispatch ${item.kind}"><span>${item.kind}</span><p>${esc(item.text)}</p></article>`).join('') || '<p>Your staff awaits the first commitment. Unchanged formations will hold their positions.</p>'}</div>${view.turn > 2 ? `<details><summary>Earlier dispatches</summary>${view.dispatches.filter(item => item.turn < view.turn - 1).map(item => `<p><strong>Turn ${item.turn}.</strong> ${esc(item.text)}</p>`).join('')}</details>` : ''}</section>
-    <footer><span>THE NARROW SEA · PROTOTYPE 0.1</span><span>Local-first · synthetic force values · no historical outcome is scripted</span></footer>
+    <footer><span>THE NARROW SEA · PROTOTYPE 0.2</span><span>Local-first · synthetic force values · no historical outcome is scripted</span></footer>
     ${showBrief ? brief() : ''}
+    ${showOverview ? overview(view) : ''}
     ${confirmCommit ? `<dialog open id="commit-dialog" aria-labelledby="commit-title"><div class="dialog-content"><div class="eyebrow">ORDERS ARE READY</div><h2 id="commit-title">Commit turn ${view.turn}?</h2><p>All ${view.units.length} formations will act on their orders. Undrafted formations hold. Your opponent commits independently; resolution cannot be undone.</p><div class="dialog-actions"><button id="cancel-commit">Return to planning</button><button id="confirm-commit" class="primary">Resolve orders</button></div></div></dialog>` : ''}
     ${confirmRestart ? `<dialog open id="restart-dialog" aria-labelledby="restart-title"><div class="dialog-content"><h2 id="restart-title">Start a new exercise?</h2><p>This replaces the locally saved exercise. Export a save first if you want to keep it. The same starting seed lets you compare different plans.</p><button id="cancel-restart">Keep this exercise</button><button id="confirm-restart" class="primary">Start afresh</button></div></dialog>` : ''}`;
+  const scoreWarning = '<p class="score-warning">Prototype score only; it does not yet distinguish invasion progress from resistance. Campaign victory remains under review.</p>';
+  template.querySelector('#brief-objective')?.insertAdjacentHTML('afterend', scoreWarning);
+  template.querySelector('.outcome h2')?.insertAdjacentHTML('afterend', scoreWarning);
+  const rules = [...template.querySelectorAll('details')].find(details => details.querySelector('summary')?.textContent === 'Exercise objective & support rules');
+  rules?.querySelector('summary')?.insertAdjacentHTML('afterend', scoreWarning);
+  rules?.insertAdjacentHTML('beforeend', '<p class="small">Orders apply for one turn. Reissue Hold at all costs each turn: it prevents retreat after losing a battle, not a council recall or a withdrawal caused by area capacity.</p>');
+  template.querySelector('#brief-dialog ol li:nth-child(2)')?.insertAdjacentHTML('beforeend', ' Orders last one turn: reissue Hold at all costs if still required. Council recalls and capacity withdrawals are separate rules.');
+  // Details retain their state across both render and reload. Summary text is a
+  // stable key for the few disclosures without explicit IDs.
+  template.querySelectorAll<HTMLDetailsElement>('details').forEach(details => {
+    const key = details.id || details.querySelector('summary')!.textContent!;
+    if (openDetails.has(key)) details.open = true;
+  });
+  reconcile(root, template);
+  root.querySelectorAll<HTMLDetailsElement>('details').forEach(details => {
+    details.ontoggle = () => {
+      const key = details.id || details.querySelector('summary')!.textContent!;
+      if (details.open) openDetails.add(key); else openDetails.delete(key);
+      persistView();
+    };
+  });
+  persistView();
   bind(view);
   const dialog = root.querySelector<HTMLDialogElement>('dialog');
-  if (dialog) { dialog.removeAttribute('open'); dialog.showModal(); dialog.addEventListener('cancel', () => { showBrief = false; confirmCommit = false; confirmRestart = false; render(); }); }
+  if (dialog) {
+    if (!dialog.matches(':modal')) {
+      dialog.removeAttribute('open'); dialog.showModal();
+      // Native dialog focus otherwise jumps to the first button at the end of
+      // the briefing, scrolling the new-player context out of view on opening.
+      if (dialog.id === 'brief-dialog') {
+        const heading = dialog.querySelector<HTMLElement>('#brief-title')!;
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+        dialog.scrollTop = 0;
+      }
+    }
+    dialog.oncancel = event => { event.preventDefault(); const focus = showOverview ? 'overview' : showBrief ? 'help' : confirmCommit ? 'commit' : 'restart'; showBrief = false; showOverview = false; confirmCommit = false; confirmRestart = false; render(); document.getElementById(focus)?.focus(); };
+  }
 }
 
 function bind(view: Observation): void {
-  const on = (id: string, fn: () => void) => document.getElementById(id)?.addEventListener('click', fn);
+  const on = (id: string, fn: () => void) => { const element = document.getElementById(id); if (element) element.onclick = fn; };
+  const change = (id: string, fn: (event: Event) => void) => { const element = document.getElementById(id); if (element) element.onchange = fn; };
   on('help', () => { showBrief = true; render(); });
-  on('close-brief', () => { showBrief = false; render(); });
+  on('close-brief', () => { showBrief = false; render(); document.getElementById('formation')?.focus(); });
+  on('overview', () => { showOverview = true; render(); });
+  on('close-overview', () => { showOverview = false; render(); document.getElementById('overview')?.focus(); });
+  root.querySelectorAll<HTMLButtonElement>('[data-overview-unit]').forEach(button => {
+    button.onclick = () => { selected = button.dataset.overviewUnit!; showOverview = false; render(); document.getElementById('formation')?.focus(); };
+  });
   on('session-toggle', () => { showSession = !showSession; render(); });
   on('export-save', () => download('narrow-sea-save.json', serializeSave(save)));
   const exportRecord = () => {
@@ -170,7 +271,7 @@ function bind(view: Observation): void {
   on('restart-outcome', () => { confirmRestart = true; render(); });
   on('cancel-restart', () => { confirmRestart = false; render(); });
   on('confirm-restart', () => {
-    save = { version: 1, state: createGame(), orders: [], choice: 'home' };
+    save = { version: 2, state: createGame(), orders: [], choice: 'home' };
     selected = 'leonidas'; corruptSave = null; notice = ''; confirmRestart = false;
     persist(); render();
   });
@@ -182,7 +283,7 @@ function bind(view: Observation): void {
     confirmCommit = false; render();
     document.querySelector('#dispatch-title')?.scrollIntoView({ block: 'nearest', behavior: 'instant' });
   });
-  document.querySelector('#import-save')?.addEventListener('change', async event => {
+  change('import-save', async event => {
     const file = (event.target as HTMLInputElement).files?.[0]; if (!file) return;
     try {
       if (file.size > 500_000) throw new Error('This file is too large for an exercise save.');
@@ -192,22 +293,21 @@ function bind(view: Observation): void {
     } catch (error) { notice = `Import rejected; your current exercise is unchanged. ${(error as Error).message}`; }
     render();
   });
-  document.querySelector('#formation')?.addEventListener('change', event => { selected = (event.target as HTMLSelectElement).value; render(); });
-  document.querySelector('#commitment')?.addEventListener('change', event => { save.choice = (event.target as HTMLSelectElement).value as 'home' | 'forward'; persist(); render(); });
+  change('formation', event => { selected = (event.target as HTMLSelectElement).value; render(); });
+  change('commitment', event => { save.choice = (event.target as HTMLSelectElement).value as 'home' | 'forward'; persist(); render(); });
   const unit = view.units.find(item => item.id === selected);
   if (!unit || view.outcome) return;
-  document.querySelector('#order-kind')?.addEventListener('change', event => {
+  change('order-kind', event => {
     const kind = (event.target as HTMLSelectElement).value as Order['kind'];
-    stage({ ...draft(unit), kind, target: kind === 'hold' ? null : draft(unit).target ?? AREA_BY_ID[unit.area].neighbors[0] });
-    document.querySelector<HTMLSelectElement>('#order-kind')?.focus();
+    stage({ ...draft(unit), kind, target: kind === 'hold' || kind === 'stand' ? null : draft(unit).target ?? AREA_BY_ID[unit.area].neighbors[0], intent: kind === 'stand' ? 'balanced' : draft(unit).intent });
   });
-  document.querySelector('#destination')?.addEventListener('change', event => { stage({ ...draft(unit), target: (event.target as HTMLSelectElement).value }); document.querySelector<HTMLSelectElement>('#destination')?.focus(); });
-  document.querySelectorAll<HTMLInputElement>('input[name="intent"]').forEach(input => input.addEventListener('change', () => { stage({ ...draft(unit), intent: input.value as Intent }); document.querySelector<HTMLInputElement>(`input[value="${input.value}"]`)?.focus(); }));
+  change('destination', event => { stage({ ...draft(unit), target: (event.target as HTMLSelectElement).value }); });
+  document.querySelectorAll<HTMLInputElement>('input[name="intent"]').forEach(input => { input.onchange = () => { stage({ ...draft(unit), intent: input.value as Intent }); }; });
   on('clear-order', () => { save.orders = save.orders.filter(order => order.unitId !== selected); persist(); render(); });
   document.querySelectorAll<SVGGElement>('[data-unit]').forEach(node => {
     const select = (event: Event) => { event.stopPropagation(); selected = node.dataset.unit!; notice = ''; render(); };
-    node.addEventListener('click', select);
-    node.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(event); } });
+    node.onclick = select;
+    node.onkeydown = event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select(event); } };
   });
   document.querySelectorAll<SVGGElement>('[data-area]').forEach(node => {
     const activate = () => {
@@ -216,8 +316,8 @@ function bind(view: Observation): void {
       if (area.domain === unit.domain && AREA_BY_ID[unit.area].neighbors.includes(area.id)) stage({ ...draft(unit), kind: 'move', target: area.id });
       else { notice = `${area.name}: ${area.description} Select a formation with a connected route to order a move here.`; render(); }
     };
-    node.addEventListener('click', activate);
-    node.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); } });
+    node.onclick = activate;
+    node.onkeydown = event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); activate(); } };
   });
 }
 
