@@ -1,5 +1,7 @@
 # Wargame: command in ancient Greece
 
+> **Status:** developed in the open as a working record. This is work in progress: contents may change, and nothing here is peer-reviewed unless stated.
+
 An evolving browser wargame about commanding land formations and naval squadrons
 through intent, uncertain intelligence and delegated support. The first large
 scenario will place the player in Greek coalition command during the invasion of
@@ -112,3 +114,7 @@ The original discussion protocol and completed initial decisions are in
 | 011 | *Battle of the Bulge* and *Unity of Command* | Computer operational-wargame paired case | [Complete](research/011-battle-of-the-bulge-unity-of-command/dossier.md) | [Complete](research/011-battle-of-the-bulge-unity-of-command/sources.md) |
 | 012 | *Commander: The Great War* | Computer World War I grand-strategy wargame | [Complete](research/012-commander-the-great-war/dossier.md) | [Complete](research/012-commander-the-great-war/sources.md) |
 | 013 | *Dragons of Glory* | Tabletop fantasy grand-strategic wargame and campaign-history generator | [Complete](research/013-dragons-of-glory/dossier.md) | [Complete](research/013-dragons-of-glory/sources.md) |
+
+## Licence
+
+Code is released under the [MIT Licence](LICENSE). Text, figures and data created for this project are released under [CC BY-SA 4.0](LICENSE-CONTENT). Third-party material keeps its own terms where stated.
